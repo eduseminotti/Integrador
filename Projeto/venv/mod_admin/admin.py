@@ -6,6 +6,7 @@ bp_admin = Blueprint('admin', __name__, url_prefix='/admin', template_folder='te
 @bp_admin.route("/")
 def index():
     return render_template('admin_index.html')
+    
 
 @bp_admin.route("/users")
 def users():

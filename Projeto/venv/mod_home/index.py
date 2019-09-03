@@ -5,6 +5,7 @@ bp_index = Blueprint('index', __name__, url_prefix='/', template_folder='templat
 @bp_index.route("/")
 def index():
     return render_template('home_index.html')
+    
 
 @bp_index.route("/home")
 def index1():
