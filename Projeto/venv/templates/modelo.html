@@ -32,7 +32,7 @@
                     <nav class="classy-navbar justify-content-between" id="nikkiNav">
 
                         <!-- Nav brand -->
-                        <a href="http://127.0.0.1:5000/" class="nav-brand"><img
+                        <a href="" class="nav-brand"><img
                                 src="{{ url_for('static', filename='img/core-img/logo.png') }}" alt=""></a>
 
                         <!-- Navbar Toggler -->
@@ -52,15 +52,27 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="http://127.0.0.1:5000/">Home</a></li>
-                                    <li><a href="#">Pages</a>
+                                    <li><a href="{{ url_for('home.index') }}">Inicio</a></li>
+                                    <li><a href="">Anuncios</a></li>
+                                    <li><a href="">Noticias</a></li>
+                                    <li><a href="#">MAIS</a>
                                         <ul class="dropdown">
-                                            <li><a href="http://127.0.0.1:5000/">Home</a></li>
-                                            <li><a href="archive-blog.html">Mural</a></li>
-                                            <li><a href="http://127.0.0.1:5000/admin/">Administrador</a></li>
+                                            <li><a href="{{ url_for('login.index') }}">login</a></li>
                                             <li><a href="about-us.html">Sobre</a></li>
                                         </ul>
                                     </li>
+                                    {% if 'user' in session %}
+                                    <li><a href="#">Administração</a>
+                                        <ul class="dropdown">
+                                            <li><a href="about-us.html">Banners</a></li>
+                                            <li><a href="about-us.html">Noticias</a></li>
+                                            <li><a href="about-us.html">Anuncios</a></li>
+                                            <li><a href="about-us.html">Usuários</a></li>
+                                            <li><a href="about-us.html">Drogas</a></li>
+                                            <li><a href="{{ url_for('login.btnlogout') }}">Sair</a></li>
+                                        </ul>
+                                    </li>
+                                    {% endif %}
                                 </ul>
 
 
@@ -98,25 +110,10 @@
 
     {% block content %}{% endblock %}
 
-    <h6 class="h6"> Informe seu Login e senha para acesso </h6>
+
 
     {% block footer %}
-    <footer class="footer-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="copywrite-text">
-                        <p>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+
     {% endblock %}
     <!-- ##### Footer Area Start ##### -->
 
