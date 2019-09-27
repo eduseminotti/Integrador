@@ -13,7 +13,7 @@
     <title>{% block title %}{% endblock %} - Portal de Noticias - Uniplac</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ url_for('static', filename='img/core-img/favicon.ico') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/core-img/logo-uniplac.png') }}">
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
@@ -33,7 +33,7 @@
 
                         <!-- Nav brand -->
                         <a href="" class="nav-brand"><img
-                                src="{{ url_for('static', filename='img/core-img/logo.png') }}" alt=""></a>
+                                src="{{ url_for('static', filename='img/core-img/logo-uniplac.png') }}" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -53,8 +53,9 @@
                             <div class="classynav">
                                 <ul>
                                     <li><a href="{{ url_for('home.index') }}">Inicio</a></li>
-                                    <li><a href="">Anuncios</a></li>
-                                    <li><a href="">Noticias</a></li>
+                                    <li><a href="/anuncios">Anuncios</a></li>
+                                    <li><a href="/avisos">Avisos</a></li>
+                                    <li><a href="/noticias">Noticias</a></li>
                                     <li><a href="#">MAIS</a>
                                         <ul class="dropdown">
                                             <li><a href="{{ url_for('login.index') }}">login</a></li>
@@ -86,16 +87,15 @@
 
                                 <!-- Social Button -->
                                 <div class="top-social-info">
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i
-                                            class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i
-                                            class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i
-                                            class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="RSS Feed"><i
-                                            class="fa fa-rss" aria-hidden="true"></i></a>
+                                    <a href="https://www.facebook.com/uniplaclages" data-toggle="tooltip"
+                                        data-placement="bottom" title="Facebook"><i class="fa fa-facebook"
+                                            aria-hidden="true"></i></a>
+                                    <a href="https://twitter.com/uniplaclages" data-toggle="tooltip"
+                                        data-placement="bottom" title="Twitter"><i class="fa fa-twitter"
+                                            aria-hidden="true"></i></a>
+                                    <a href="https://www.instagram.com/uniplaclages/" data-toggle="tooltip"
+                                        data-placement="bottom" title="Instagram"><i class="fa fa-instagram"
+                                            aria-hidden="true"></i></a>
                                 </div>
 
                             </div>
