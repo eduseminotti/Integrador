@@ -6,6 +6,9 @@ from mod_home.home import bp_home
 from mod_login.login import bp_login
 from mod_admin.admin import bp_admin
 from mod_erro.erro import bp_erro
+from mod_avisos.avisos import bp_avisos
+from mod_anuncios.anuncios import bp_anuncios
+from mod_noticias.noticias import bp_noticias
 
 import os
 
@@ -15,6 +18,9 @@ app.register_blueprint(bp_home)
 app.register_blueprint(bp_login)
 app.register_blueprint(bp_admin)
 app.register_blueprint(bp_erro)
+app.register_blueprint(bp_avisos)
+app.register_blueprint(bp_anuncios)
+app.register_blueprint(bp_noticias)
 app.secret_key = os.urandom(12).hex()
 
 
