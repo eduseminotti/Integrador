@@ -57,23 +57,29 @@ Av. Castelo Branco, nº170, Bairro Universitário - Lages - SC - Brasil
                             <div class="classynav">
                                 <ul>
                                     <li><a href="{{ url_for('home.index') }}">Inicio</a></li>
-                                    <li><a href="/anuncios">Anuncios</a></li>
-                                    <li><a href="/avisos">Avisos</a></li>
-                                    <li><a href="/noticias">Noticias</a></li>
+                                    <li><a href="#">Noticias</a>
+                                        <ul class="dropdown">
+                                            <li><a href="/noticias">Noticias</a></li>
+                                            <li><a href="/anuncios">Anuncios</a></li>
+                                            <li><a href="/avisos">Avisos</a></li>
+                                        </ul>
+                                    </li>  
+                                    {% if 'user' not in session %}                                 
                                     <li><a href="#">MAIS</a>
                                         <ul class="dropdown">
-                                            <li><a href="{{ url_for('login.index') }}">login</a></li>
-                                            <li><a href="about-us.html">Sobre</a></li>
+                                            <li><a href="{{ url_for('login.index') }}">login</a></li> 
+                                            <li><a href="about-us.html">Sobre</a></li>                                        
                                         </ul>
                                     </li>
+                                    {% endif %}
                                     {% if 'user' in session %}
                                     <li><a href="#">Administração</a>
                                         <ul class="dropdown">
                                             <li><a href="about-us.html">Banners</a></li>
                                             <li><a href="about-us.html">Noticias</a></li>
                                             <li><a href="about-us.html">Anuncios</a></li>
-                                            <li><a href="about-us.html">Usuários</a></li>
-                                            <li><a href="about-us.html">Drogas</a></li>
+                                            <li><a href="{{ url_for('usuarios.index') }}">Usuários</a></li>                                            
+                                            <li><a href="about-us.html">Sobre</a></li>
                                             <li><a href="{{ url_for('login.btnlogout') }}">Sair</a></li>
                                         </ul>
                                     </li>

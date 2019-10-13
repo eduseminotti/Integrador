@@ -1,6 +1,8 @@
 #coding: utf-8
 from flask import Blueprint, render_template, request, session, redirect , url_for
 from functools import wraps
+from ValidaUserDB import ValidaUser
+import pymssql  
 
 bp_login = Blueprint('login', __name__, url_prefix='/login', template_folder='templates')
 
@@ -14,14 +16,27 @@ def btnlogin():
      user =  request.form.get('user')
      password = request.form.get('pass')
 
+     ValidaUserBanco = ValidaUser()
+     userBanco = ValidaUserBanco.validaUsuario( user , password )
+
+     userNameDB=0
+     passwordDB=0
+     tipo=0
+
+     for row in userBanco:
+          userNameDB=row[0]
+          passwordDB=row[1]
+          tipo=row[2]
+
      #Usuario correto
-     if user == "user1" and password == "123":
+     if user == userNameDB and password == passwordDB:
           session.clear()
-          session['user'] = user
+          session['user'] = userNameDB
+          session['tipo'] = tipo
           return redirect(url_for('admin.index'))
      #user errado
      else:     
-          return redirect(url_for('login.index', userIncorrect=1))
+          return redirect(url_for('login.index', userIncorrect=1 , userdb = userNameDB , passwordDB=passwordDB ,user=user,password=password))
 
 @bp_login.route("/btnlogout",methods=['GET','POST']) 
 def btnlogout():
