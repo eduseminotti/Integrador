@@ -9,8 +9,10 @@ from mod_erro.erro import bp_erro
 from mod_avisos.avisos import bp_avisos
 from mod_anuncios.anuncios import bp_anuncios
 from mod_noticias.noticias import bp_noticias
+from mod_usuarios.usuarios import bp_usuarios
 
-import os
+import os , sys
+import pymssql
 
 app = Flask(__name__)
 
@@ -21,6 +23,8 @@ app.register_blueprint(bp_erro)
 app.register_blueprint(bp_avisos)
 app.register_blueprint(bp_anuncios)
 app.register_blueprint(bp_noticias)
+app.register_blueprint(bp_usuarios)
+
 app.secret_key = os.urandom(12).hex()
 
 
@@ -28,6 +32,7 @@ app.secret_key = os.urandom(12).hex()
 def before_request():
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=30)
+
 
 @app.errorhandler(404)
 def nao_encontrado(error):
