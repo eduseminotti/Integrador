@@ -13,7 +13,7 @@ class ValidaUser(object):
         banco=Banco()
         try:
             c=banco.conexao.cursor()
-            c.execute("SELECT [username] ,[password] , [tipo]  FROM [dbo].[users] where username = %s and password = %s", (username , password))
+            c.execute("SELECT [id],[username] ,[password] , [tipo]  FROM [dbo].[users] where username = %s and password = %s", (username , password))
             result = c.fetchall()
             c.close()
             return result 

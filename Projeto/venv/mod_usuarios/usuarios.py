@@ -3,12 +3,9 @@ from flask import Blueprint, render_template , redirect , url_for , request
 from mod_login.login import validaSessao
 from UsuariosDB import Usuarios
 
-
-
 bp_usuarios = Blueprint('usuarios', __name__, url_prefix='/usuarios', template_folder='templates')
 
-
-@bp_usuarios.route("/")
+@bp_usuarios.route("/") 
 @validaSessao
 def index():
 

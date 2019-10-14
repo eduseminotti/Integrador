@@ -61,14 +61,13 @@ Av. Castelo Branco, nº170, Bairro Universitário - Lages - SC - Brasil
                                         <ul class="dropdown">
                                             <li><a href="/noticias">Noticias</a></li>
                                             <li><a href="/anuncios">Anuncios</a></li>
-                                            <li><a href="/avisos">Avisos</a></li>
+                                            <li><a href="{{ url_for('Avisos.Index') }}">Avisos</a></li>
                                         </ul>
                                     </li>  
                                     {% if 'user' not in session %}                                 
                                     <li><a href="#">MAIS</a>
                                         <ul class="dropdown">
-                                            <li><a href="{{ url_for('login.index') }}">login</a></li> 
-                                            <li><a href="about-us.html">Sobre</a></li>                                        
+                                            <li><a href="{{ url_for('login.index') }}">login</a></li>                                                                        
                                         </ul>
                                     </li>
                                     {% endif %}
@@ -78,8 +77,8 @@ Av. Castelo Branco, nº170, Bairro Universitário - Lages - SC - Brasil
                                             <li><a href="about-us.html">Banners</a></li>
                                             <li><a href="about-us.html">Noticias</a></li>
                                             <li><a href="about-us.html">Anuncios</a></li>
+                                            <li><a href="{{ url_for('Avisos.AvisosAdm') }}">Avisos</a></li>
                                             <li><a href="{{ url_for('usuarios.index') }}">Usuários</a></li>                                            
-                                            <li><a href="about-us.html">Sobre</a></li>
                                             <li><a href="{{ url_for('login.btnlogout') }}">Sair</a></li>
                                         </ul>
                                     </li>
@@ -118,7 +117,12 @@ Av. Castelo Branco, nº170, Bairro Universitário - Lages - SC - Brasil
     </header>
     <!-- ##### Header Area End ##### -->
 
-    {% block content %}{% endblock %}
+
+    {% block content %}
+    
+
+    
+    {% endblock %}
 
 
 

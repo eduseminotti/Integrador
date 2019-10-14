@@ -1,18 +1,20 @@
 from BancoDB import Banco
 
-class Usuarios(object):
+class Avisos(object):
 
-    def __init__(self, id=0, Nome="",Username="", Password="",  tipo="" ,  email="" , phone=""):
+    def __init__(self, id=0, Titulo="", DataInicial="",  DataFinal="" ,Conteudo="" , Tipo="", Status="" , UserPostId="", InsertDate=""):
         self.info = {}
         self.id = id
-        self.Nome = Nome
-        self.Username = Username 
-        self.Password = Password
-        self.tipo = tipo
-        self.email = email
-        self.phone = phone 
+        self.Titulo = Titulo
+        self.Conteudo = Conteudo
+        self.DataInicial = DataInicial 
+        self.DataFinal = DataFinal
+        self.Tipo = Tipo
+        self.Status = Status
+        self.UserPostId = UserPostId
+        self.InsertDate = InsertDate
 
-    def selectUserALL(self):
+    def selectAvisosALL(self):
         banco=Banco()
         try:
             c=banco.conexao.cursor()
@@ -23,24 +25,24 @@ class Usuarios(object):
         except:
             return "Ocorreu um erro na busca do usuário"
 
-    def selectUser(self):
+    def selectAvisosALLAdm(self):
         banco=Banco()
         try:
             c=banco.conexao.cursor()
-            c.execute("SELECT  [id] ,[Nome],[UserName],password,[tipo],[email],[Phone] FROM [dbo].[Users] where id =  %s" , (self.id))
+            c.execute("SELECT [Id],[Titulo],[Conteudo],[DataInicial],[DataFinal],[Tipo],[Status],[UserPostId],[insertdate]FROM [dbo].[Post]" )
             result = c.fetchall()
             c.close()
             return result
         except:
-            return "Ocorreu um erro na busca do usuário"            
+            return "Ocorreu um erro na busca dos avisos"            
 
-    def insertUser(self):
+    def insertAviso(self):
 
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("INSERT into [dbo].[Users] ( Nome , UserName , Password , tipo , email , phone) VALUES  (%s, %s, %s, %s, %s, %s)" , 
-            (self.Nome, self.Username, self.Password, self.tipo , self.email , self.phone ))          
+            c.execute(" insert into [dbo].[Post] ( Titulo , Conteudo , DataInicial , DataFinal , Tipo , Status , UserPostId )  VALUES  (%s, %s, %s, %s, %s, %s)" , 
+            (self.Titulo, self.Conteudo, self.DataInicial, self.DataFinal , self.Tipo , self.Status, self.UserPostId ))          
            
             banco.conexao.commit()
             c.close()
