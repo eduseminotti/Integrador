@@ -24,15 +24,17 @@ def btnlogin():
      tipo=0
 
      for row in userBanco:
-          userNameDB=row[0]
-          passwordDB=row[1]
-          tipo=row[2]
+          id = row[0]
+          userNameDB=row[1]
+          passwordDB=row[2]
+          tipo=row[3]
 
      #Usuario correto
      if user == userNameDB and password == passwordDB:
           session.clear()
           session['user'] = userNameDB
           session['tipo'] = tipo
+          session['id'] = id
           return redirect(url_for('admin.index'))
      #user errado
      else:     
