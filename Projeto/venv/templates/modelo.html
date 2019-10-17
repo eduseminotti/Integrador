@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -8,17 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
     <!-- Title -->
     <title>{% block title %}{% endblock %} - Portal de Noticias - Uniplac</title>
-
     <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='img/core-img/logo-uniplac.png') }}">
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
     {% endblock %}
-
 </head>
 
 <body>
@@ -30,32 +26,29 @@
                 <div class="container-fluid">
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between" id="nikkiNav">
-
                         <!-- Nav brand -->
                         <a href="{{ url_for('home.index') }}" class="nav-brand"><img
                                 src="{{ url_for('static', filename='img/core-img/logo-uniplac.png') }}" alt=""></a>
-
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
                             <span class="navbarToggler"><span></span><span></span><span></span></span>
                         </div>
-                        <!--Dados da universidade no menu-->
-                       <div class="col align-self-center" > Fone: (49) 3251-1022 - Email: contato@uniplaclages.edu.br<br>
-Av. Castelo Branco, nº170, Bairro Universitário - Lages - SC - Brasil 
-                      </div>
 
                         <!-- Menu -->
                         <div class="classy-menu">
-
-
                             <!-- close btn -->
                             <div class="classycloseIcon">
                                 <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                             </div>
-
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
+                                    <li>
+                                        <!--Dados da universidade no menu-->
+                                        <div class="col align-self-center">Uniplac - Fone: (49) 3251-1022 -
+                                            contato@uniplaclages.edu.br
+                                        </div>
+                                    </li>
                                     <li><a href="{{ url_for('home.index') }}">Inicio</a></li>
                                     <li><a href="#">Noticias</a>
                                         <ul class="dropdown">
@@ -63,11 +56,11 @@ Av. Castelo Branco, nº170, Bairro Universitário - Lages - SC - Brasil
                                             <li><a href="/anuncios">Anuncios</a></li>
                                             <li><a href="{{ url_for('Avisos.Index') }}">Avisos</a></li>
                                         </ul>
-                                    </li>  
-                                    {% if 'user' not in session %}                                 
+                                    </li>
+                                    {% if 'user' not in session %}
                                     <li><a href="#">MAIS</a>
                                         <ul class="dropdown">
-                                            <li><a href="{{ url_for('login.index') }}">login</a></li>                                                                        
+                                            <li><a href="{{ url_for('login.index') }}">login</a></li>
                                         </ul>
                                     </li>
                                     {% endif %}
@@ -78,14 +71,12 @@ Av. Castelo Branco, nº170, Bairro Universitário - Lages - SC - Brasil
                                             <li><a href="about-us.html">Noticias</a></li>
                                             <li><a href="about-us.html">Anuncios</a></li>
                                             <li><a href="{{ url_for('Avisos.AvisosAdm') }}">Avisos</a></li>
-                                            <li><a href="{{ url_for('usuarios.index') }}">Usuários</a></li>                                            
+                                            <li><a href="{{ url_for('usuarios.index') }}">Usuários</a></li>
                                             <li><a href="{{ url_for('login.btnlogout') }}">Sair</a></li>
                                         </ul>
                                     </li>
                                     {% endif %}
                                 </ul>
-
-
                                 <div class="search-form" ; hidden=true>
                                     <form action="#" method="get">
                                         <input type="search" name="search" class="form-control"
@@ -93,7 +84,6 @@ Av. Castelo Branco, nº170, Bairro Universitário - Lages - SC - Brasil
                                         <button type="submit"><i class="fa fa-search"></i></button>
                                     </form>
                                 </div>
-
                                 <!-- Social Button -->
                                 <div class="top-social-info">
                                     <a href="https://www.facebook.com/uniplaclages" data-toggle="tooltip"
@@ -106,7 +96,6 @@ Av. Castelo Branco, nº170, Bairro Universitário - Lages - SC - Brasil
                                         data-placement="bottom" title="Instagram"><i class="fa fa-instagram"
                                             aria-hidden="true"></i></a>
                                 </div>
-
                             </div>
                             <!-- Nav End -->
                         </div>
@@ -119,9 +108,9 @@ Av. Castelo Branco, nº170, Bairro Universitário - Lages - SC - Brasil
 
 
     {% block content %}
-    
 
-    
+
+
     {% endblock %}
 
 

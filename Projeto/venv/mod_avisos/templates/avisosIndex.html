@@ -1,5 +1,37 @@
 {% extends "modelo.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Avisos Admin{% endblock %}
 {% block content %}
-<h1>Avisos:</h1>
+<div class="container">
+    <div class="row">
+        <h2>Avisos:</h2>
+    </div>
+    <div>
+        <hr>
+    </div>
+    {% if result %}
+    {% for row in result %}
+    <div class="row">
+        <div Class="col-md-12">
+            <div class="col-md-12">
+                <h3>{{ row[0] }}</h3>
+            </div>
+            <div class="col-md-12">
+                <p>{{ row[1] }}</p>
+                <p>{{ row[2] }}</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    {%else%}
+    <div class="row">
+        <div>
+            <div class="col-md-12">
+                <p>Nenhum Aviso cadastrado!</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
 {% endblock %}
