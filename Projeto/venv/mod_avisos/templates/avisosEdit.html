@@ -5,39 +5,46 @@
     <br>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
-            <form action="{{ url_for('Avisos.AddAviso') }}" name="usuario" method="POST">
+            <form action="{{ url_for('Avisos.UpdateAviso') }}" name="usuario" method="POST">
                 <h2>Cadastro de Avisos</h2>
                 <hr>
+                {% for row in result %}
                 <div class="form-row">
-                        <input hidden type="text" value="{{ session['id'] }}" name="UserId">
+                    <input hidden type="text" value="{{ session['id'] }}" name="UserId">
+                    <input hidden value="{{ row[0] }}" name="Id" id="Id">
 
                     <div class="form-group col-md-12">
-                        <label  for="Titulo">Titulo</label>
-                        <input maxlength="100" type="text" class="form-control" name="Titulo">
+                        <label for="Titulo">Titulo</label>
+                        <input value="{{ row[1] }}" maxlength="100" type="text" class="form-control" name="Titulo">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="datainicial">Data Incial</label>
-                        <input type="date" class="form-control" name="DataInicial">
+                        <input value="{{ row[3] }}" type="date" class="form-control" name="DataInicial">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="dataFinal">Data Final</label>
-                        <input type="date" class="form-control" name="DataFinal">
+                        <input value="{{ row[4] }}" type="date" class="form-control" name="DataFinal">
                     </div>
                     <div class="form-group col-md-1"></div>
                     <div class="form-group col-md-2">
                         <div class="custom-control custom-checkbox">
                             <br>
+                            {%if  row[5]  == 1: %}
+                            <input type="checkbox" class="custom-control-input" checked name="Status" id="Status">
+                            {% else %}
                             <input type="checkbox" class="custom-control-input" name="Status" id="Status">
+                            {% endif %}
                             <label class="custom-control-label" for="Status">Ativo</label>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="Conteudo">Conteudo</label>
-                        <textarea maxlength="500" type="text" class="form-control" name="Conteudo"></textarea>
+                        <textarea maxlength="500" type="text" class="form-control"
+                            name="Conteudo">{{ row[2] }}</textarea>
                     </div>
+                    {%endfor%}
 
-
-                    <button type="submit" name="NovoAviso" id="NovoAviso" class="btn btn-primary">Cadastrar</button>
+                    <button type="submit" name="UpdateAviso" id="UpdateAviso" class="btn btn-primary">Gravar</button>
 
             </form>
         </div>

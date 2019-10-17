@@ -1,11 +1,11 @@
 {% extends "modelo.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Avisos Admin{% endblock %}
 {% block content %}
 <div class="container">
     <br>
     <div class="row">
         <div class="col-md-4">
-            <form action="{{ url_for('Avisos.avisosNew') }}" >
+            <form action="{{ url_for('Avisos.avisosNew') }}">
                 <h2><button style="width: 190px" type="submit" class="btn btn-primary">Cadastrar Novo Aviso</button>
             </form>
         </div>
@@ -24,8 +24,9 @@
                                 <th>Data Inicial</th>
                                 <th>Data Final</th>
                                 <th>Status</th>
-                                <th>UserId</th>
+                                <th>Usuário</th>
                                 <th>Editar</th>
+                                <th>Excluir</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,14 +35,20 @@
                             <tr>
                                 <th> {{ row[0] }}</th>
                                 <td> {{ row[1] }}</td>
-                                <td> {{ row[2] }}</td>
                                 <td> {{ row[3] }}</td>
                                 <td> {{ row[4] }}</td>
-                                <td> {{ row[5] }}</td>
+                                <td> {{ row[6] }}</td>
+                                <td> {{ row[7] }}</td>
                                 <td>
-                                    <form action="{{ url_for('usuarios.edituser') }}" method="POST" name='edituser'>
-                                        <input type='hidden' name='id' value='{{ row[0] }}'>
+                                    <form action="{{ url_for('Avisos.EditAviso') }}" method="POST" name='edituser'>
+                                        <input type='hidden' name='Id' value='{{ row[0] }}'>
                                         <button class="btn btn-toolbar" type='submit' name='edituser'>Editar</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ url_for('Avisos.DeleteAviso') }}" method="POST" name='edituser'>
+                                        <input type='hidden' name='Id' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit' name='edituser'>Excluir</button>
                                     </form>
                                 </td>
                             </tr>
