@@ -1,3 +1,4 @@
+from flask import Blueprint, render_template , redirect , url_for , request ,session
 from BancoDB import Banco
 
 class ValidaUser(object):
@@ -18,4 +19,18 @@ class ValidaUser(object):
             c.close()
             return result 
         except:
-            return "Ocorreu um erro na busca do usuário"
+            return "Ocorreu um erro na busca do usuário"         
+
+    def validaPermissao(self, entidade, tipo):
+        
+        #tipo = session['tipo']
+        
+        if entidade == "avisos":
+            if tipo != 1 and tipo != 3 : 
+                return False
+            else:
+                return True 
+        return False                
+
+
+

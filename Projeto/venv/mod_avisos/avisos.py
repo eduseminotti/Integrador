@@ -1,7 +1,8 @@
 #coding: utf-8
-from flask import Blueprint, render_template , redirect , url_for , request
+from flask import Blueprint, render_template , redirect , url_for , request ,session
 from mod_login.login import validaSessao
 from AvisosDB import Avisos
+from ValidaUserDB import ValidaUser
 
 bp_avisos = Blueprint('Avisos', __name__, url_prefix='/avisos', template_folder='templates')
 
@@ -16,21 +17,45 @@ def Index():
 @bp_avisos.route('/AvisosAdm')
 @validaSessao
 def AvisosAdm():
+    
+    valida = ValidaUser()
 
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
+    
     avisos = Avisos()
 
     result = avisos.selectAvisosALLAdm() 
-
+    
     return render_template("avisosAdm.html", result=result), 200
+
 
 @bp_avisos.route('/avisosNew')
 @validaSessao
 def avisosNew():
+
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
+
+
     return render_template('avisosNew.html')    
   
 @bp_avisos.route('/AddAviso', methods=['POST'])
 @validaSessao
 def AddAviso():
+
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
 
     avisos = Avisos()
 
@@ -59,6 +84,13 @@ def AddAviso():
 @validaSessao
 def EditAviso():
 
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
+
     avisos = Avisos()
 
     avisos.id = request.form['Id']
@@ -70,6 +102,13 @@ def EditAviso():
 @bp_avisos.route('/UpdateAviso', methods=['POST'])   
 @validaSessao
 def UpdateAviso():
+
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
 
     avisos = Avisos()
 
@@ -97,6 +136,13 @@ def UpdateAviso():
 @validaSessao
 def DeleteAviso():
 
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
+
     avisos = Avisos()
 
     avisos.id = request.form['Id']
@@ -104,3 +150,5 @@ def DeleteAviso():
     exec = avisos.DeleteAviso() 
 
     return redirect(url_for('Avisos.AvisosAdm', resultInsert=exec ))
+
+

@@ -12,14 +12,14 @@ class Avisos(object):
         self.Tipo = Tipo
         self.Status = Status
         self.UserPostId = UserPostId
-        self.InsertDate = InsertDate  
+        self.InsertDate = InsertDate    
 
     def selectAvisosALL(self):
         banco=Banco()
         try:
             c=banco.conexao.cursor()
             c.execute("select titulo, Conteudo, cast( DataInicial as date) as DataInicial  from dbo.post where tipo = 4 "+
-            "and Status = 1 and DataInicial <= cast( getdate() as date)  and datafinal  >= cast( getdate() as date) ")
+            "and Status = 1 and DataInicial <= cast( getdate() as date)  and datafinal  >= cast( getdate() as date) order by insertdate desc")
             result = c.fetchall()
             c.close()
             return result
