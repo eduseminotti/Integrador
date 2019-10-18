@@ -12,7 +12,7 @@ class Avisos(object):
         self.Tipo = Tipo
         self.Status = Status
         self.UserPostId = UserPostId
-        self.InsertDate = InsertDate  
+        self.InsertDate = InsertDate    
 
     def selectAvisosALL(self):
         banco=Banco()

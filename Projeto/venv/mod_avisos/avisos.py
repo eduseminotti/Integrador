@@ -1,7 +1,8 @@
 #coding: utf-8
-from flask import Blueprint, render_template , redirect , url_for , request
+from flask import Blueprint, render_template , redirect , url_for , request ,session
 from mod_login.login import validaSessao
 from AvisosDB import Avisos
+from ValidaUserDB import ValidaUser
 
 bp_avisos = Blueprint('Avisos', __name__, url_prefix='/avisos', template_folder='templates')
 
@@ -16,21 +17,36 @@ def Index():
 @bp_avisos.route('/AvisosAdm')
 @validaSessao
 def AvisosAdm():
-
+    
+    tipo = session['tipo']
+    if tipo != 1 and tipo != 3 :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ))  
+    
     avisos = Avisos()
 
     result = avisos.selectAvisosALLAdm() 
+    
+    return render_template("avisosAdm.html", result=result, tipo=tipo ), 200
 
-    return render_template("avisosAdm.html", result=result), 200
 
 @bp_avisos.route('/avisosNew')
 @validaSessao
 def avisosNew():
+
+    tipo = session['tipo']
+    if tipo != 1 and tipo != 3 :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ))
+
+
     return render_template('avisosNew.html')    
   
 @bp_avisos.route('/AddAviso', methods=['POST'])
 @validaSessao
 def AddAviso():
+
+    tipo = session['tipo']
+    if tipo != 1 and tipo != 3 :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ,))
 
     avisos = Avisos()
 
@@ -59,6 +75,10 @@ def AddAviso():
 @validaSessao
 def EditAviso():
 
+    tipo = session['tipo']
+    if tipo != 1 and tipo != 3 :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ,))
+
     avisos = Avisos()
 
     avisos.id = request.form['Id']
@@ -70,6 +90,10 @@ def EditAviso():
 @bp_avisos.route('/UpdateAviso', methods=['POST'])   
 @validaSessao
 def UpdateAviso():
+
+    tipo = session['tipo']
+    if tipo != 1 and tipo != 3 :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ,))    
 
     avisos = Avisos()
 
@@ -97,6 +121,10 @@ def UpdateAviso():
 @validaSessao
 def DeleteAviso():
 
+    tipo = session['tipo']
+    if tipo != 1 and tipo != 3 :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ))  
+
     avisos = Avisos()
 
     avisos.id = request.form['Id']
@@ -104,3 +132,5 @@ def DeleteAviso():
     exec = avisos.DeleteAviso() 
 
     return redirect(url_for('Avisos.AvisosAdm', resultInsert=exec ))
+
+
