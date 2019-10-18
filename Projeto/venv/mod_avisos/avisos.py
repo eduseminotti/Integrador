@@ -18,24 +18,30 @@ def Index():
 @validaSessao
 def AvisosAdm():
     
-    tipo = session['tipo']
-    if tipo != 1 and tipo != 3 :  
-        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ))  
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
     
     avisos = Avisos()
 
     result = avisos.selectAvisosALLAdm() 
     
-    return render_template("avisosAdm.html", result=result, tipo=tipo ), 200
+    return render_template("avisosAdm.html", result=result), 200
 
 
 @bp_avisos.route('/avisosNew')
 @validaSessao
 def avisosNew():
 
-    tipo = session['tipo']
-    if tipo != 1 and tipo != 3 :  
-        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ))
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
 
 
     return render_template('avisosNew.html')    
@@ -44,9 +50,12 @@ def avisosNew():
 @validaSessao
 def AddAviso():
 
-    tipo = session['tipo']
-    if tipo != 1 and tipo != 3 :  
-        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ,))
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
 
     avisos = Avisos()
 
@@ -75,9 +84,12 @@ def AddAviso():
 @validaSessao
 def EditAviso():
 
-    tipo = session['tipo']
-    if tipo != 1 and tipo != 3 :  
-        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ,))
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
 
     avisos = Avisos()
 
@@ -91,9 +103,12 @@ def EditAviso():
 @validaSessao
 def UpdateAviso():
 
-    tipo = session['tipo']
-    if tipo != 1 and tipo != 3 :  
-        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ,))    
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
 
     avisos = Avisos()
 
@@ -121,9 +136,12 @@ def UpdateAviso():
 @validaSessao
 def DeleteAviso():
 
-    tipo = session['tipo']
-    if tipo != 1 and tipo != 3 :  
-        return redirect(url_for('home.index', msg="User_sem_Permissão_tipo_", tipo=tipo ))  
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("avisos", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
 
     avisos = Avisos()
 
