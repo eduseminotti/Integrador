@@ -6,7 +6,7 @@ from ValidaUserDB import ValidaUser
 
 bp_avisos = Blueprint('Avisos', __name__, url_prefix='/avisos', template_folder='templates')
 
-@bp_avisos.route('/')
+@bp_avisos.route('/') 
 def Index():
     avisos = Avisos()
 

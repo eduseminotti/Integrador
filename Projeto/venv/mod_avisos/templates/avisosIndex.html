@@ -10,13 +10,16 @@
     </div>
     {% if result %}
     {% for row in result %}
+
     <div class="row">
+
         <div Class="col-md-12">
             <div class="col-md-12">
-                <h3>{{ row[0] }}</h3>
+                <h1>{{ row[0] }}</h1>
             </div>
             <div class="col-md-12">
-                <p>{{ row[1] }}</p>
+
+                {{  row[1] |safe}}
                 <p>{{ row[2] }}</p>
             </div>
         </div>
@@ -32,6 +35,6 @@
         </div>
     </div>
     {% endif %}
-
 </div>
+
 {% endblock %}

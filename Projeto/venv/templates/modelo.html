@@ -50,7 +50,7 @@
                                         </div>
                                     </li>
                                     <li><a href="{{ url_for('home.index') }}">Inicio</a></li>
-                                    <li><a href="#">Noticias</a>
+                                    <li><a href="#">Conteúdo</a>
                                         <ul class="dropdown">
                                             <li><a href="/noticias">Noticias</a></li>
                                             <li><a href="/anuncios">Anuncios</a></li>
@@ -60,11 +60,7 @@
                                         </ul>
                                     </li>
                                     {% if 'user' not in session %}
-                                    <li><a href="#">MAIS</a>
-                                        <ul class="dropdown">
-                                            <li><a href="{{ url_for('login.index') }}">login</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="{{ url_for('login.index') }}">login</a> </li>
                                     {% endif %}
                                     {% if 'user' in session %}
                                     <li><a href="#">Administração</a>
@@ -136,6 +132,8 @@
     <script src="{{ url_for('static', filename='js/plugins/plugins.js') }}"></script>
     <!-- Active js -->
     <script src="{{ url_for('static', filename='js/active.js') }}"></script>
+    <!-- CKEDITOR -->
+    <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
 
 </body>
 

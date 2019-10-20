@@ -9,10 +9,10 @@
                 <h2>Cadastro de Avisos</h2>
                 <hr>
                 <div class="form-row">
-                        <input hidden type="text" value="{{ session['id'] }}" name="UserId">
+                    <input hidden type="text" value="{{ session['id'] }}" name="UserId">
 
                     <div class="form-group col-md-12">
-                        <label  for="Titulo">Titulo</label>
+                        <label for="Titulo">Titulo</label>
                         <input maxlength="100" type="text" class="form-control" name="Titulo">
                     </div>
                     <div class="form-group col-md-4">
@@ -33,13 +33,19 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="Conteudo">Conteudo</label>
-                        <textarea maxlength="500" type="text" class="form-control" name="Conteudo"></textarea>
+                        <textarea maxlength="500" type="text" class="form-control" id="Conteudo"
+                            name="Conteudo"></textarea>
                     </div>
-
-
-                    <button type="submit" name="NovoAviso" id="NovoAviso" class="btn btn-primary">Cadastrar</button>
-
+                    <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+                    <script>
+                        CKEDITOR.replace('Conteudo');
+                    </script>
+                </div>
+                <button type="submit" name="NovoAviso" id="NovoAviso" class="btn btn-primary">Cadastrar</button>
             </form>
         </div>
     </div>
-    {% endblock %}
+</div>
+<!-- CKEDITOR -->
+
+{% endblock %}
