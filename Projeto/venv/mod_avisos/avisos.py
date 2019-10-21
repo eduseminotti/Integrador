@@ -41,7 +41,7 @@ def avisosNew():
     retorno = valida.validaPermissao("avisos", session['tipo'])
         
     if retorno != True :  
-        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))   
 
 
     return render_template('avisosNew.html')    

@@ -1,0 +1,53 @@
+{% extends "modelo.html" %}
+{% block title %}Novo Anuncio{% endblock %}
+{% block content %}
+<div class="container"> 
+    <br>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <form action="{{ url_for('Avisos.AddAviso') }}" name="usuario" method="POST">
+                <h2>Cadastro de Anúncios</h2>
+                <hr>
+                <div class="form-row">
+                    <input hidden type="text" value="{{ session['id'] }}" name="UserId">
+                    <div class="form-group col-md-12">
+                        <label for="Titulo">Titulo</label>
+                        <input maxlength="100" type="text" class="form-control" name="Titulo"> 
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="datainicial">Data Incial</label>
+                        <input type="date" class="form-control" name="DataInicial">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="dataFinal">Data Final</label>
+                        <input type="date" class="form-control" name="DataFinal">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="Conteudo">Conteudo</label>
+                        <textarea maxlength="500" type="text" class="form-control" id="Conteudo"
+                            name="Conteudo"></textarea>
+                    </div>
+
+                    <div class="input-group mb-3">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="inputGroupFile02">
+                              <label class="custom-file-label" for="inputGroupFile02">Importar Imagen</label>
+                            </div>
+                            <div class="input-group-append">
+                              <span class="input-group-text" id="">Importar</span>
+                            </div>
+                          </div>
+                    <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+                    <script>
+                        CKEDITOR.replace('Conteudo');
+                    </script>
+                </div>
+                <button type="submit" name="NovoAnuncio" id="NovoAnuncio" class="btn btn-primary">Cadastrar</button>
+                <div class="row">
+                    <div class="form-group col-md-12"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

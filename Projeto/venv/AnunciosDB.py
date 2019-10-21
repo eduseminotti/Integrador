@@ -15,7 +15,7 @@ class AnunciosPublic(object):
             c=banco.conexao.cursor() 
             c.execute("select id, post.titulo, post.insertdate ,"+
             "imagem = ( select top 1 img.image from dbo.Imagens as img where img.Post_ID = post.Id) "+
-            "from dbo.post as post where post.tipo = 3  order by post.insertdate desc")
+            "from dbo.post as post where post.tipo = 3  order by post.insertdate desc") 
             result = c.fetchall()
             c.close()
             return result
