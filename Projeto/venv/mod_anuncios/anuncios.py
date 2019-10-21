@@ -13,4 +13,4 @@ def index():
 
     result = anuncios.selectAllAnunciosPublic()
         
-    return render_template("AllAnunciosPublic.html", result=result), 200
+    return render_template("AllAnunciosPublic.html", result=result), 200 

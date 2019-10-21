@@ -7,6 +7,8 @@ class Banco():
         user = "sa"
         password = "123456"
         db = "seminotti"
-        self.conexao = pymssql.connect(host, user, password, db)
+        self.conexao = pymssql.connect(host, user, password, db) 
+
+
         
 
