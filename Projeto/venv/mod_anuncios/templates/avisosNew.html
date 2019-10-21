@@ -1,0 +1,45 @@
+{% extends "modelo.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <form action="{{ url_for('Avisos.AddAviso') }}" name="usuario" method="POST">
+                <h2>Cadastro de Avisos</h2>
+                <hr>
+                <div class="form-row">
+                        <input hidden type="text" value="{{ session['id'] }}" name="UserId">
+
+                    <div class="form-group col-md-12">
+                        <label  for="Titulo">Titulo</label>
+                        <input maxlength="100" type="text" class="form-control" name="Titulo">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="datainicial">Data Incial</label>
+                        <input type="date" class="form-control" name="DataInicial">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="dataFinal">Data Final</label>
+                        <input type="date" class="form-control" name="DataFinal">
+                    </div>
+                    <div class="form-group col-md-1"></div>
+                    <div class="form-group col-md-2">
+                        <div class="custom-control custom-checkbox">
+                            <br>
+                            <input type="checkbox" class="custom-control-input" name="Status" id="Status">
+                            <label class="custom-control-label" for="Status">Ativo</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="Conteudo">Conteudo</label>
+                        <textarea maxlength="500" type="text" class="form-control" name="Conteudo"></textarea>
+                    </div>
+
+
+                    <button type="submit" name="NovoAviso" id="NovoAviso" class="btn btn-primary">Cadastrar</button>
+
+            </form>
+        </div>
+    </div>
+    {% endblock %}
