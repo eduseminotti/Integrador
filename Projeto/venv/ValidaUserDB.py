@@ -19,7 +19,7 @@ class ValidaUser(object):
             c.close()
             return result 
         except:
-            return "Ocorreu um erro na busca do usuário"         
+            return None       
 
     def validaPermissao(self, entidade, tipo):
         

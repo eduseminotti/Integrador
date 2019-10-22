@@ -9,7 +9,6 @@ bp_login = Blueprint('login', __name__, url_prefix='/login', template_folder='te
 @bp_login.route("/")
 def index():
     return render_template('login.html')
-
     
 @bp_login.route("/btnlogin",methods=['POST']) 
 def btnlogin():
@@ -23,22 +22,25 @@ def btnlogin():
      passwordDB=0
      tipo=0
 
-     for row in userBanco:
-          id = row[0]
-          userNameDB=row[1]
-          passwordDB=row[2]
-          tipo=row[3]
-
-     #Usuario correto
-     if user == userNameDB and password == passwordDB:
-          session.clear()
-          session['user'] = userNameDB
-          session['tipo'] = tipo
-          session['id'] = id
-          return redirect(url_for('admin.index'))
-     #user errado
+     if userBanco != None and userBanco != "" :
+          for row in userBanco:
+               id = row[0]
+               userNameDB=row[1]
+               passwordDB=row[2]
+               tipo=row[3]
+          #Usuario correto
+          if user == userNameDB and password == passwordDB:
+               session.clear()
+               session['user'] = userNameDB
+               session['tipo'] = tipo
+               session['id'] = id
+               return redirect(url_for('admin.index'))
+          #user errado
+          else:     
+               return redirect(url_for('login.index', userIncorrect=1 , userdb = userNameDB , passwordDB=passwordDB ,user=user,password=password))
      else:     
           return redirect(url_for('login.index', userIncorrect=1 , userdb = userNameDB , passwordDB=passwordDB ,user=user,password=password))
+
 
 @bp_login.route("/btnlogout",methods=['GET','POST']) 
 def btnlogout():
