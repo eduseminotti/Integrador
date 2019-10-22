@@ -1,11 +1,11 @@
 {% extends "modelo.html" %}
-{% block title %}Avisos Admin{% endblock %}
+{% block title %}Anuncios Admin{% endblock %}
 {% block content %}
 <div class="container">
     <br>
     <div class="row">
         <div class="col-md-4">
-            <form action="{{ url_for('Avisos.avisosNew') }}">
+            <form action="{{ url_for('Anuncios.AnunciosNew') }}">
                 <h2><button style="width: 190px" type="submit" class="btn btn-primary">Cadastrar Novo Aviso</button>
             </form>
         </div>
@@ -15,7 +15,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h2>Listagem de Avisos ativos</h2>
+                    <h2>Listagem de Anuncios ativos</h2>
                     <table class="table">
                         <thead>
                             <tr>
@@ -37,8 +37,8 @@
                                 <td> {{ row[1] }}</td>
                                 <td> {{ row[3] }}</td>
                                 <td> {{ row[4] }}</td>
+                                <td> {{ row[5] }}</td>
                                 <td> {{ row[6] }}</td>
-                                <td> {{ row[7] }}</td>
                                 <td>
                                     <form action="{{ url_for('Avisos.EditAviso') }}" method="POST" name='edituser'>
                                         <input type='hidden' name='Id' value='{{ row[0] }}'>
