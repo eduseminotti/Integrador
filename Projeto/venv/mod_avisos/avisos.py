@@ -74,8 +74,6 @@ def AddAviso():
     else:    
         avisos.Status = 0
 
-    exec = avisos.updateAviso()
-
     exec = avisos.insertAviso()
 
     return redirect(url_for('Avisos.AvisosAdm', resultInsert=exec))

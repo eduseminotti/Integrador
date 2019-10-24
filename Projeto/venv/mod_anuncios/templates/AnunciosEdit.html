@@ -1,5 +1,5 @@
 {% extends "modelo.html" %}
-{% block title %}Novo Anuncio{% endblock %}
+{% block title %}Editar Anuncio{% endblock %}
 {% block content %}
 <div class="container">
     <br>
@@ -9,6 +9,7 @@
                 <h2>Cadastro de Anúncios</h2>
                 <hr>
                 <div class="form-row">
+                    <input hidden type="text" value="{{ session['id'] }}" name="UserId">
                     <input hidden type="text" value="{{ session['id'] }}" name="UserId">
                     <div class="form-group col-md-12">
                         <label for="Titulo">Titulo</label>

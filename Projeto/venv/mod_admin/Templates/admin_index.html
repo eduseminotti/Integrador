@@ -9,22 +9,21 @@
             <form action="{{ url_for('admin.EditarConfig') }}" name="EditarConfig" method="POST">
                 <h2>Configurações Gerais</h2>
                 <hr>
-                {% for row in result %}
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="Titulo">Nome</label>
-                        <input value="{{ row[0] }}" maxlength="30" type="text" class="form-control" name="Nome">
+                        <input value="" maxlength="30" type="text" class="form-control" name="Nome">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="datainicial">Telefone</label>
-                        <input value="{{ row[1] }}" type="tel" class="form-control" name="Phone">
+                        <input value="" type="tel" class="form-control" name="Phone">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="Titulo">Email</label>
-                        <input value="{{ row[2] }}" maxlength="30" maxlength="50" type="email" class="form-control" name="Email">
+                        <input value="" maxlength="30" maxlength="50" type="email" class="form-control" name="Email">
                     </div>
                 </div>
-                {%endfor%}
+          
 
                 <button type="submit" name="EditarConfig" id="EditarConfig" class="btn btn-primary">Gravar</button>
 
