@@ -10,22 +10,22 @@ bp_admin = Blueprint('admin', __name__, url_prefix='/admin', template_folder='te
 @validaSessao
 def index():
 
-    admin = Admin()
+    #admin = Admin()
 
-    result = admin.selectConfig()
+    #result = admin.selectConfig()
     
-    return render_template('admin_index.html', result=result)
+    return render_template('admin_index.html')
 
 @bp_admin.route("/EditarConfig", methods=['POST'])
 @validaSessao
 def EditarConfig():
 
-    admin = Admin()
+    #admin = Admin()
     
-    admin.Nome = request.form['Nome']
-    admin.Phone = request.form['Phone']
-    admin.Email = request.form['Email']
+    # admin.Nome = request.form['Nome']
+    # admin.Phone = request.form['Phone']
+    # admin.Email = request.form['Email']
 
-    exec = admin.updateConfig()
+    #exec = admin.updateConfig()
 
-    return redirect(url_for('admin.index', resultInsert=exec))
+    return redirect(url_for('admin.index'))

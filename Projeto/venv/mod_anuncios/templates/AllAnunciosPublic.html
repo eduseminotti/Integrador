@@ -1,39 +1,76 @@
 {% extends "modelo.html" %}
-{% block title %}Avisos Admin{% endblock %}
+{% block title %}Anúncios{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <h2>Avisos:</h2>
-    </div>
-    <div>
-        <hr>
-    </div>
-    {% if result %}
-    {% for row in result %}
-    <div class="row">
-        <div Class="col-md-12">
-            <div class="col-md-12">
-                <h3>{{ row[1] }}</h3>
-            </div>
-            <div class="col-md-12">
-                {% if row[3] != None  %}
-                <p>{{ row[3] }}</p>
-                {% endif %}
-                <p>{{ row[2] }}</p>
-            </div>
-        </div>
-    </div>
-    <hr>
-    {% endfor %}
-    {%else%}
-    <div class="row">
-        <div>
-            <div class="col-md-12">
-                <p>Nenhum Aviso cadastrado!</p>
-            </div>
-        </div>
-    </div>
-    {% endif %}
 
-</div>
+<section class="blog-content-area section-padding-0-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Blog Posts Area -->
+            <div class="col-12 col-lg-8">
+                <div class="blog-posts-area">
+                    <div class="row">
+
+                        <!-- Section Heading -->
+                        <div class="col-12">
+                            <div class="section-heading">
+                                <h2>Anúncios</h2>
+                                <p>Categoria: Anúncios</p>
+                            </div>
+                        </div>
+                        {% if result %}
+                        {% for row in result %}
+                        <!-- Single Blog Post -->
+
+                        <div class="col-12 col-sm-6">
+                            <div class="single-blog-post mb-50">
+                                <form action="{{ url_for('Anuncios.SingleAnuncio') }}" name="usuario" method="POST">
+                                    <!-- Thumbnail -->
+                                    <input hidden name="Id" type="text" value="{{ row[0] }}">
+                                    {% if row[3] != None  %}
+
+                                    <div class="post-thumbnail">
+                                        <!--   carregar imagem do banco {{ row[3] }} <a href="#"><img src="img/blog-img/1.jpg" alt=""></a> -->
+                                    </div>
+                                    {%else%}
+                                    <div class="post-thumbnail">
+                                        <a ><img
+                                                src="{{ url_for('static', filename='img/core-img/produto-sem-imagem1000px.jpg') }}"
+                                                alt=""></a>
+                                    </div>
+                                    {% endif %}
+                                    <!-- Content -->
+                                    <div class="post-content">
+                                        <p class="post-date">{{ row[2] }}</p>
+                                        <a  method="POST"
+                                            class="post-title">
+                                            <h4>{{ row[1] }}</h4>
+                                        </a>
+
+                                        <p class="post-excerpt" maxlength="100">{{ row[4] | safe}}</p>
+                                    </div>
+                                    <button type="submit" class="btn nikki-btn">Leia Mais</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                        {%else%}
+                        <div class="row">
+                            <div>
+                                <div class="col-md-12">
+                                    <p class="post-excerpt">Nenhum Anuncio cadastrado!</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
 {% endblock %}
