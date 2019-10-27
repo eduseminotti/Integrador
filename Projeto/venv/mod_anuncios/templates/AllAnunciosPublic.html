@@ -29,20 +29,18 @@
                                     {% if row[3] != None  %}
 
                                     <div class="post-thumbnail">
-                                        <!--   carregar imagem do banco {{ row[3] }} <a href="#"><img src="img/blog-img/1.jpg" alt=""></a> -->
+                                        <a href="#"><img src="{{ row[3] }}" alt="" width="200px" height="200px"></a>
                                     </div>
                                     {%else%}
                                     <div class="post-thumbnail">
-                                        <a ><img
-                                                src="{{ url_for('static', filename='img/core-img/produto-sem-imagem1000px.jpg') }}"
-                                                alt=""></a>
+                                        <a><img src="{{ url_for('static', filename='img/core-img/produto-sem-imagem1000px.jpg') }}"
+                                                alt="" width="200px" height="200px"></a>
                                     </div>
                                     {% endif %}
                                     <!-- Content -->
                                     <div class="post-content">
                                         <p class="post-date">{{ row[2] }}</p>
-                                        <a  method="POST"
-                                            class="post-title">
+                                        <a method="POST" class="post-title">
                                             <h4>{{ row[1] }}</h4>
                                         </a>
 

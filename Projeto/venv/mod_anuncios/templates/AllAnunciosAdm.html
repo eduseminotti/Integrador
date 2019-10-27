@@ -37,20 +37,29 @@
                                 <td> {{ row[1] }}</td>
                                 <td> {{ row[3] }}</td>
                                 <td> {{ row[4] }}</td>
-                                <td> {{ row[5] }}</td>
+
+                                {% if row[5] == 1 %}
+                                <td>Aprovado</td>
+                                {%elif row[5] == 2%}
+                                <td>Rejeitado</td>
+                                {%elif row[5] == 0%}
+                                <td>pendente</td>
+                                {%endif%}
                                 <td> {{ row[6] }}</td>
+                                {% if session['tipo'] != 4 or  row[5] == 0 %}
                                 <td>
-                                    <form action="{{ url_for('Avisos.EditAviso') }}" method="POST" name='edituser'>
+                                    <form action="{{ url_for('Anuncios.EditAnuncio') }}" method="POST" name='edituser'>
                                         <input type='hidden' name='Id' value='{{ row[0] }}'>
                                         <button class="btn btn-toolbar" type='submit' name='edituser'>Editar</button>
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{ url_for('Avisos.DeleteAviso') }}" method="POST" name='edituser'>
+                                    <form action="{{ url_for('Anuncios.ExcluiAnuncio') }}" method="POST" name='edituser'>
                                         <input type='hidden' name='Id' value='{{ row[0] }}'>
                                         <button class="btn btn-toolbar" type='submit' name='edituser'>Excluir</button>
                                     </form>
                                 </td>
+                                {%endif%}
                             </tr>
                             {% endfor %}
                             {% endif %}

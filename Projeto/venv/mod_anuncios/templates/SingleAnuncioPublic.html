@@ -10,95 +10,89 @@
             <div class="col-12">
 
                 <!-- Post Details Area -->
-
+                {% if anuncio %}
+                {% for anuncio in anuncio %}
                 <div class="single-post-details-area">
                     <div class="post-content">
-                        {% if post %}
-                        {% for row in post %}
                         <div class="text-center mb-50">
-                            <p class="post-date">{{ row[4] }}</p>
-                            <h2 class="post-title">{{ row[1] }}</h2>
+                            <p class="post-date">{{ anuncio[4] }}</p>
+                            <h2 class="post-title">{{ anuncio[1] }}</h2>
                             <!-- Post Meta -->
                             <div class="post-meta">
-                                <a href="#"><span>by</span> {{ row[3] }}</a>
+                                <a href="#"><span>by</span> {{ anuncio[3] }}</a>
                             </div>
-                        </div>
-
-                        <!-- Post Thumbnail -->
-                        <div class="post-thumbnail mb-50">
-                            <img src="{{ url_for('static', filename='img/core-img/produto-sem-imagem250px.jpg') }}"
-                                alt="">
                         </div>
 
                         <!-- Post Text -->
                         <div class="post-text">
 
-
-                            <p>{{ row[2] |safe}}</p>
+                            <p>{{ anuncio[2] |safe }}</p>
 
                             <div class="row">
+                                {% for imagens in imagens%}
+
                                 <div class="col-12 col-md-6">
-                                    <img src="{{ url_for('static', filename='img/core-img/produto-sem-imagem250px.jpg') }}"
-                                        alt="">
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <img src="{{ url_for('static', filename='img/core-img/produto-sem-imagem250px.jpg') }}"
-                                        alt="">
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                        {%endif%}
-
-
-                        <!-- Related Post Area -->
-                        <div class="related-posts clearfix">
-                            <!-- Headline -->
-                            <h4 class="headline">mais anúncios</h4>
-                            <div class="row">
-                                {% if related %}
-                                {% for row in related %}
-                                <!-- Single Blog Post -->
-
-                                <div class="col-12 col-sm-6">
-                                    <div class="single-blog-post mb-50">
-                                        <form action="{{ url_for('Anuncios.SingleAnuncio') }}" name="usuario"
-                                            method="POST">
-                                            <!-- Thumbnail -->
-                                            <input hidden name="Id" type="text" value="{{ row[0] }}">
-                                            {% if row[3] != None  %}
-
-                                            <div class="post-thumbnail">
-                                                <!--   carregar imagem do banco {{ row[3] }} <a href="#"><img src="img/blog-img/1.jpg" alt=""></a> -->
-                                            </div>
-                                            {%else%}
-                                            <div class="post-thumbnail">
-                                                <a><img src="{{ url_for('static', filename='img/core-img/produto-sem-imagem250px.jpg') }}"
-                                                        alt=""></a>
-                                            </div>
-                                            {% endif %}
-                                            <!-- Content -->
-                                            <div class="post-content">
-                                                <p class="post-date">{{ row[2] }}</p>
-                                                <a method="POST" class="post-title">
-                                                    <h4>{{ row[1] }}</h4>
-                                                </a>
-
-                                                <p class="post-excerpt" maxlength="100">{{ row[4] | safe}}</p>
-                                            </div>
-                                            <button type="submit" class="btn nikki-btn">Leia Mais</button>
-                                        </form>
-                                    </div>
+                                    <img class="mb-30" src="{{imagens[1]}}" width="300px" height="300px" alt="">
                                 </div>
 
                                 {% endfor %}
-                                {%endif%}
                             </div>
                         </div>
+
+                        {% endfor %}
+                        {% endif %}
+
                     </div>
+
+                    {% if related %}
+                    <!-- Related Post Area -->
+                    <div class="related-posts clearfix">
+                        <!-- Headline -->
+                        <h4 class="headline">mais anúncios</h4>
+                        <div class="row">
+
+                            {% for related in related %}
+                            <!-- Single Blog Post -->
+
+                            <div class="col-12 col-sm-6">
+                                <div class="single-blog-post mb-50">
+                                    <form action="{{ url_for('Anuncios.SingleAnuncio') }}" name="usuario" method="POST">
+                                        <!-- Thumbnail -->
+                                        <input hidden name="Id" type="text" value="{{ related[0] }}">
+                                        {% if related[3] != None  %}
+
+                                        <div class="post-thumbnail">
+                                            <a href="#"><img src=" {{ related[3] }} " alt=""></a>
+                                        </div>
+                                        {%else%}
+                                        <div class="post-thumbnail">
+                                            <a><img src="{{ url_for('static', filename='img/core-img/produto-sem-imagem250px.jpg') }}"
+                                                    alt=""></a>
+                                        </div>
+                                        {% endif %}
+                                        <!-- Content -->
+                                        <div class="post-content">
+                                            <p class="post-date">{{ related[2] }}</p>
+                                            <a method="POST" class="post-title">
+                                                <h4>{{ related[1] }}</h4>
+                                            </a>
+
+                                            <p class="post-excerpt" maxlength="100">{{ related[4] | safe}}</p>
+                                        </div>
+                                        <button type="submit" class="btn nikki-btn">Leia Mais</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    {%endif%}
                 </div>
             </div>
         </div>
+    </div>
 </section>
 <!-- ##### Blog Content Area End ##### -->
 
