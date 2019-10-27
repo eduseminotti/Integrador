@@ -12,7 +12,7 @@ from mod_noticias.noticias import bp_noticias
 from mod_usuarios.usuarios import bp_usuarios
 
 import os , sys
-import pymssql
+import base64
 
 app = Flask(__name__)
 

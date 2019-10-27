@@ -1,68 +1,103 @@
 {% extends "modelo.html" %}
-{% block title %}Editar Anuncio{% endblock %}
+{% block title %}Edição de Anuncio{% endblock %}
 {% block content %}
 <div class="container">
     <br>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
-            <form action="{{ url_for('Anuncios.AddAnuncio') }}" name="usuario" method="POST">
-                <h2>Cadastro de Anúncios</h2>
+            <form action="{{ url_for('Anuncios.UpdateAnuncio') }}" name="usuario" method="POST"
+                enctype="multipart/form-data">
+                <h2>Edição de Anúncios</h2>
                 <hr>
                 <div class="form-row">
+                    {% if anuncio %}
+                    {% for anuncio in anuncio%}
+
                     <input hidden type="text" value="{{ session['id'] }}" name="UserId">
-                    <input hidden type="text" value="{{ session['id'] }}" name="UserId">
+                    <input hidden type="text" value="{{ anuncio[0] }}" name="Id">
                     <div class="form-group col-md-12">
                         <label for="Titulo">Titulo</label>
-                        <input maxlength="100" type="text" class="form-control" name="Titulo">
+                        <input required maxlength="100" value="{{anuncio[1] }}" type="text" class="form-control"
+                            name="Titulo">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="datainicial">Data Inicial</label>
-                        <input type="date" class="form-control" name="DataInicial">
+                        <input required value="{{anuncio[3] }}" type="date" class="form-control" name="DataInicial">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="dataFinal">Data Final</label>
-                        <input type="date" class="form-control" name="DataFinal">
+                        <input required value="{{anuncio[4] }}" type="date" class="form-control" name="DataFinal">
                     </div>
-                    {% if session['tipo'] !=4: %}
-                    <input hidden type="number" class="form-control" value="1" name="Status">
-                    {%else%}
+                    {% if session['tipo'] == 4 %}
                     <input hidden type="number" class="form-control" value="0" name="Status">
-                    {% endif %}
+                    {%else%}
 
-                    <div hidden class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="Status">Status</label>
-                        <select class="custom-select" name="xx" id="Status">
-                            <option selected></option>
+
+                        {% if  anuncio[5] == 1 %}
+                        <select class="custom-select" name="Status" id="Status">
+                            <option value="0">Pendente</option>
+                            <option selected value="1">Aprovado</option>
+                            <option value="2">Rejeitado</option>
+
+                        </select>
+                        {% elif anuncio[5] == 2 %}
+                        <select class="custom-select" name="Status" id="Status">
+                            <option value="0">Pendente</option>
+                            <option value="1">Aprovado</option>
+                            <option selected value="2">Rejeitado</option>
+
+                        </select>
+                        {% elif  anuncio[5] == 0 %}
+                        <select class="custom-select" name="Status" id="Status">
+                            <option selected value="0">Pendente</option>
                             <option value="1">Aprovado</option>
                             <option value="2">Rejeitado</option>
-                            <option value="0">Pendente</option>
-                        </select>
-                    </div>
 
+                        </select>
+                        {% endif %}
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="username">Usuário</label>
+                        <input disabled maxlength="100" value="{{anuncio[6] }}" type="text" class="form-control"
+                            name="username" id="username">
+                    </div>
+                    {% endif %}
                     <div class="form-group col-md-12">
                         <label for="Conteudo">Conteudo</label>
-                        <textarea maxlength="500" type="text" class="form-control" id="Conteudo"
-                            name="Conteudo"></textarea>
+                        <textarea required maxlength="500" type="text" class="form-control" id="Conteudo"
+                            name="Conteudo">{{anuncio[2] }}</textarea>
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="inputFile" id="inputFile">
-                            <label class="custom-file-label" for="inputFile">Importar Imagem</label>
-                        </div>
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="">Importar</span>
-                        </div>
-                    </div>
-                </div>
-                <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
-                <script>
-                    CKEDITOR.replace('Conteudo');
-                </script>
+                    <div class="form-group col-md-12">
+                        <label for="imagem">Imagem:</label>
+                        <input value="" type="file" name="imagem" accept="image/*" id="imagem">
 
-                <button type="submit" name="NovoAnuncio" id="NovoAnuncio" class="btn btn-primary">Cadastrar</button>
-                <div class="row">
-                    <div class="form-group col-md-12"></div>
-                </div>
+                        {% if anuncio[7] %}
+                        <div class="post-thumbnail">
+                            <a href="#"><img src="{{anuncio[7] }}" alt="" width="150PX" height="150PX"></a>
+                            <div class="custom-control custom-checkbox">
+                                <br>                               
+                                <input type="checkbox" class="custom-control-input" name="RemoveIMG" id="RemoveIMG">
+                                <label class="custom-control-label" for="RemoveIMG">Remover Imagem?</label>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+                    <script>
+                        CKEDITOR.replace('Conteudo');
+                    </script>
+                    {% endfor %}
+                    {% endif %}
+
+
+                    <button type="submit" name="NovoAnuncio" id="NovoAnuncio" class="btn btn-primary">Gravar</button>
+                    <div class="row">
+                        <div class="form-group col-md-12"></div>
+                    </div>
             </form>
         </div>
     </div>
