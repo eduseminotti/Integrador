@@ -1,13 +1,21 @@
 #coding: utf-8
-from flask import Blueprint, render_template , redirect , url_for , request
+from flask import Blueprint, render_template , redirect , url_for , request,session
 from mod_login.login import validaSessao
 from UsuariosDB import Usuarios
+from ValidaUserDB import ValidaUser
 
 bp_usuarios = Blueprint('usuarios', __name__, url_prefix='/usuarios', template_folder='templates')
 
 @bp_usuarios.route("/") 
 @validaSessao
 def index():
+
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("Users", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
 
     user=Usuarios()
     
@@ -19,6 +27,14 @@ def index():
 @bp_usuarios.route('/newuser')
 @validaSessao
 def usuarios_new():
+
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("Users", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
+
     return render_template('usuarios_new.html')    
 
 
@@ -26,6 +42,13 @@ def usuarios_new():
 @bp_usuarios.route('/addUser', methods=['POST'])
 @validaSessao
 def addUser():
+
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("Users", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))  
 
     user=Usuarios()
 
@@ -44,6 +67,13 @@ def addUser():
 @validaSessao
 def edituser():
 
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("Users", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))      
+
     user=Usuarios()
 
     user.id = request.form['id']
@@ -55,6 +85,13 @@ def edituser():
 @bp_usuarios.route('/UpdateUser', methods=['POST'])
 @validaSessao
 def UpdateUser():
+
+    valida = ValidaUser()
+
+    retorno = valida.validaPermissao("Users", session['tipo'])
+        
+    if retorno != True :  
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))      
 
     user=Usuarios()
     
@@ -70,15 +107,3 @@ def UpdateUser():
 
     return redirect(url_for('usuarios.index', resultUpdate=exec))
 
-
-@bp_usuarios.route('/deleteuser', methods=['POST'])
-@validaSessao
-def deleteuser():
-
-    user=Usuarios()
-
-    user.id = request.form['id']
-
-    user.deleteUser()
-
-    return redirect(url_for('usuarios.index'))
