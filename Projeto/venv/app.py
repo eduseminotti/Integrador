@@ -10,6 +10,7 @@ from mod_avisos.avisos import bp_avisos
 from mod_anuncios.anuncios import bp_anuncios
 from mod_noticias.noticias import bp_noticias
 from mod_usuarios.usuarios import bp_usuarios
+from mod_Banners.Banners import bp_Banners
 
 import os , sys
 import base64
@@ -24,15 +25,14 @@ app.register_blueprint(bp_avisos)
 app.register_blueprint(bp_anuncios)
 app.register_blueprint(bp_noticias)
 app.register_blueprint(bp_usuarios)
+app.register_blueprint(bp_Banners)
 
 app.secret_key = os.urandom(12).hex()
-
 
 @app.before_request
 def before_request():
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=30)
-
 
 @app.errorhandler(404)
 def nao_encontrado(error):
@@ -41,7 +41,6 @@ def nao_encontrado(error):
 @app.errorhandler(500)
 def problema_servidor(error):
     return redirect(url_for('bp_erro.problema_servidor'))
-
 
 if __name__ == '__main__':
     app.run()

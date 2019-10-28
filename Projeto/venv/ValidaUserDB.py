@@ -30,7 +30,17 @@ class ValidaUser(object):
                 return False
             else:
                 return True 
-        return False                
+        
+        if entidade == "Users":
+            if tipo != 1  : 
+                return False
+            else:
+                return True 
+        return False             
+
+
+
+                    
 
 
 

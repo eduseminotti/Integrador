@@ -67,12 +67,7 @@ def AddAviso():
 
     avisos.UserPostId = request.form['UserId']
 
-    Status = 'Status'  in  request.form
-
-    if Status == "on" or Status == True:
-        avisos.Status = 1
-    else:    
-        avisos.Status = 0
+    avisos.Status = request.form['Status']
 
     exec = avisos.insertAviso()
 
@@ -117,18 +112,11 @@ def UpdateAviso():
     avisos.DataFinal = request.form['DataFinal']
     avisos.Tipo = 4
     avisos.UserPostId = request.form['UserId']
-
-    Status = 'Status'  in  request.form
-
-
-    if Status == "on" or Status == True:
-        avisos.Status = 1
-    else:    
-        avisos.Status = 0
+    avisos.Status = request.form['Status']
 
     exec = avisos.updateAviso()
 
-    return redirect(url_for('Avisos.AvisosAdm', resultInsert=exec , Status=Status))
+    return redirect(url_for('Avisos.AvisosAdm', resultInsert=exec ))
 
 @bp_avisos.route('/DeleteAviso', methods=['POST'])
 @validaSessao

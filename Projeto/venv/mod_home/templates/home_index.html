@@ -3,6 +3,7 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
+<!-- ##### Hero Area Start ##### -->
 <section class="hero-area">
     <!-- Preloader -->
     <div class="preloader d-flex align-items-center justify-content-center">
@@ -19,30 +20,29 @@
 
     <div class="hero-post-slides owl-carousel">
 
+        {% for row in banners %}
         <!-- Single Hero Post -->
         <div class="single-hero-post d-flex flex-wrap">
             <!-- Post Thumbnail -->
-            <div class="slide-post-thumbnail h-100 bg-img" 
-            style="background-image: url({{ url_for('static', filename='img/blog-img/13.jpg') }});"></div>
+            <div class="slide-post-thumbnail h-100 bg-img" style="background-image: url({{row[3]}});"></div>
             <!-- Post Content -->
             <div class="slide-post-content h-100 d-flex align-items-center">
                 <div class="slide-post-text">
-                    <p class="post-date" data-animation="fadeIn" data-delay="100ms">MAY 01, 2018 / lifestyle</p>
+                    <p class="post-date" data-animation="fadeIn" data-delay="100ms">{{row[2]}}</p>
                     <a href="#" class="post-title" data-animation="fadeIn" data-delay="300ms">
-                        <h2>We’ve Launched More May Gal Meets Glam Collection Dresses</h2>
+                        <h2>{{row[0]}}</h2>
                     </a>
-                    <p class="post-excerpt" data-animation="fadeIn" data-delay="500ms">Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui</p>
-                    <a href="#" class="btn nikki-btn" data-animation="fadeIn" data-delay="700ms">Read More</a>
+                    <p class="post-excerpt" data-animation="fadeIn" data-delay="500ms">{{row[1]}}</p>                  
                 </div>
+                <!-- Page Count -->
+                <div class="page-count"></div>
             </div>
         </div>
+         {%endfor%}
 
-
-
-    
 
     </div>
 </section>
+<!-- ##### Hero Area End ##### -->
 
 {% endblock %}
