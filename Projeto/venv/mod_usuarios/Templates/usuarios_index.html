@@ -40,7 +40,15 @@
                                 <th> {{ row[0] }}</th>
                                 <td> {{ row[1] }}</td>
                                 <td> {{ row[2] }}</td>
-                                <td> {{ row[4] }}</td>
+                                {% if row[4] == 1 %}
+                                <td>Tipo 1</td>
+                                {%elif row[4] == 2%}
+                                <td>Tipo 2</td>
+                                {%elif row[4] == 3%}
+                                <td>Tipo 3</td>
+                                {%elif row[4] == 4%}
+                                <td>Tipo 4</td>
+                                {%endif%}
                                 <td> {{ row[5] }}</td>
                                 <td> {{ row[6] }}</td>
                                 <td>
