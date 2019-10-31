@@ -17,6 +17,7 @@ class ValidaUser(object):
         log = Logs()
         log.LogadorInfo("Iniciando validação de usuario: " + username)      
 
+
         try:
             c=banco.conexao.cursor()
             c.execute("SELECT [id],[username] ,[password] , [tipo]  FROM [dbo].[users] where username = %s and password = %s", (username , password))

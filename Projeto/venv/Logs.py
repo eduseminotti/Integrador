@@ -16,6 +16,7 @@ class Logs(object):
         file = Path(self.fileName)
         isFile = file.is_file()
 
+
         if isFile == True :
             return
         else:
