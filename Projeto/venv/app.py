@@ -11,7 +11,6 @@ from mod_anuncios.anuncios import bp_anuncios
 from mod_noticias.noticias import bp_noticias
 from mod_usuarios.usuarios import bp_usuarios
 from mod_Banners.Banners import bp_Banners
-
 import os , sys
 import base64
 
