@@ -63,11 +63,13 @@ def addUser():
 
     return redirect(url_for('usuarios.index', resultInsert=exec))
 
+
 @bp_usuarios.route('/edituser', methods=['POST'])   
 @validaSessao
 def edituser():
 
     valida = ValidaUser()
+
 
     retorno = valida.validaPermissao("Users", session['tipo'])
         
@@ -81,6 +83,7 @@ def edituser():
     res = user.selectUser()
 
     return render_template('usuarios_edit.html', result=res )   
+
 
 @bp_usuarios.route('/UpdateUser', methods=['POST'])
 @validaSessao
