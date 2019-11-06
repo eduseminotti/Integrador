@@ -1,0 +1,15 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/Projeto/venv/Lib/site-packages
+/Projeto/venv/mod_admin/__pycache__
+/Projeto/venv/mod_anuncios/__pycache__
+/Projeto/venv/mod_avisos/__pycache__
+/Projeto/venv/mod_Banners/__pycache__
+/Projeto/venv/mod_erro/__pycache__
+/Projeto/venv/mod_home/__pycache__
+*.pyc
+/Projeto/venv/Scripts
+/Projeto/venv/pyvenv.cfg
+
