@@ -23,7 +23,7 @@ class Imagens(object):
         banco=Banco()
         try:
             c=banco.conexao.cursor() 
-            c.execute("insert into Imagens ( Image, Post_ID) values ( %s, %s )" , (self.imagem, self.Post_ID ))
+            c.execute("insert into Imagens ( Image, Post_ID) values ( %s, %s )", (self.imagem, self.Post_ID ))
 
             banco.conexao.commit()     
 

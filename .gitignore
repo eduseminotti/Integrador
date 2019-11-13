@@ -13,3 +13,6 @@
 /Projeto/venv/Scripts
 /Projeto/venv/pyvenv.cfg
 
+/Projeto/.idea
+/Projeto/venv/.idea
+/Projeto/venv/.vs

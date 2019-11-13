@@ -7,7 +7,7 @@
         <div class="col-md-4">
             <form>
                 <h2><button style="width: 190px" type="button" class="btn btn-primary"
-                        onclick="window.location.href='/noticias/nova'">Cadastrar Nova Noticia</button>
+                        onclick="window.location.href='/noticias/novanoticia'">Cadastrar Nova Noticia</button>
             </form>
         </div>
     </div>
@@ -21,30 +21,32 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nome</th>
-                                <th>Username</th>
-                                <th>Tipo</th>
-                                <th>Email</th>
-                                <th>Phone</th>
+                                <th>Titulo</th>
+                                <th>Data</th>
                                 <th>Editar</th>
+                                <th>Excluir</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% if result %}
-                            {% for row in result %}
+                            {% if news %}
+                            {% for row in news %}
                             <tr>
                                 <th> {{ row[0] }}</th>
                                 <td> {{ row[1] }}</td>
                                 <td> {{ row[2] }}</td>
-                                <td> {{ row[4] }}</td>
-                                <td> {{ row[5] }}</td>
-                                <td> {{ row[6] }}</td>
                                 <td>
-                                    <form action="{{ url_for('usuarios.edituser') }}" method="POST" name='edituser'>
-                                        <input type='hidden' name='id' value='{{ row[0] }}'>
+                                    <form action="{{ url_for('Anuncios.EditAnuncio') }}" method="POST" name='edituser'>
+                                        <input type='hidden' name='Id' value='{{ row[0] }}'>
                                         <button class="btn btn-toolbar" type='submit' name='edituser'>Editar</button>
                                     </form>
                                 </td>
+                                <td>
+                                    <form action="{{ url_for('Anuncios.ExcluiAnuncio') }}" method="POST"
+                                        name='edituser'>
+                                        <input type='hidden' name='Id' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit' name='edituser'>Excluir</button>
+                                    </form>
+                                </td>                            
                             </tr>
                             {% endfor %}
                             {% endif %}

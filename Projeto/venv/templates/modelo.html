@@ -63,19 +63,25 @@
                                     {% if 'user' in session %}
                                     <li><a href="#">Administração</a>
                                         <ul class="dropdown">
+
                                             {% if session['tipo'] == 1  %}
                                             <li><a href="{{ url_for('Banners.BannersList') }}">Banners</a></li>
                                             {% endif %}
+                                            
                                             {% if session['tipo'] == 1 or session['tipo'] == 2 : %}
-                                            <li><a href="about-us.html">Noticias</a></li>
+                                            <li><a href="{{ url_for('noticias.listanoticias') }}">Noticias</a></li>
                                             {% endif %}
+                                            
                                             <li><a href="{{ url_for('Anuncios.AllAnunciosAdm') }}">Anuncios</a></li>
+                                            
                                             {% if session['tipo'] == 1 or session['tipo'] == 3 : %}
                                             <li><a href="{{ url_for('Avisos.AvisosAdm') }}">Avisos</a></li>
                                             {% endif %}
+                                            
                                             {% if session['tipo'] == 1  : %}
                                             <li><a href="{{ url_for('usuarios.index') }}">Usuários</a></li>
                                             {% endif %}
+                                            
                                             <li><a href="{{ url_for('login.btnlogout') }}">Sair</a></li>
                                         </ul>
                                     </li>
