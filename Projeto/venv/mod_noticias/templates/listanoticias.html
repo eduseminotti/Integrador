@@ -35,13 +35,13 @@
                                 <td> {{ row[1] }}</td>
                                 <td> {{ row[2] }}</td>
                                 <td>
-                                    <form action="{{ url_for('Anuncios.EditAnuncio') }}" method="POST" name='edituser'>
+                                    <form action="{{ url_for('noticias.editanoticia') }}" method="POST" name='editanoticia'>
                                         <input type='hidden' name='Id' value='{{ row[0] }}'>
                                         <button class="btn btn-toolbar" type='submit' name='edituser'>Editar</button>
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{ url_for('Anuncios.ExcluiAnuncio') }}" method="POST"
+                                    <form action="{{ url_for('noticias.excluinoticia') }}" method="POST"
                                         name='edituser'>
                                         <input type='hidden' name='Id' value='{{ row[0] }}'>
                                         <button class="btn btn-toolbar" type='submit' name='edituser'>Excluir</button>

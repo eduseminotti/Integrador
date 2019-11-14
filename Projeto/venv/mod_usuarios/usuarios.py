@@ -70,7 +70,6 @@ def edituser():
 
     valida = ValidaUser()
 
-
     retorno = valida.validaPermissao("Users", session['tipo'])
         
     if retorno != True :  
@@ -102,7 +101,7 @@ def UpdateUser():
     user.Nome = request.form['Nome']
     user.Username = request.form['Username']
     user.Password = request.form['Password']
-    user.tipo = request.form['tipo']
+    user.tipo = request.form['Tipo']
     user.email = request.form['Email']
     user.phone = request.form['Phone']
 

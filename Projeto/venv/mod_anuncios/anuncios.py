@@ -114,7 +114,7 @@ def UpdateAnuncio():
     if RmvImg == "on" or RmvImg == True:
         imagens.DeleteImagem()
     else:    
-        imagens.imagem =  "data:" + request.files['imagem'].content_type + ";base64," + str(base64.b64encode( request.files['imagem'].read() ) , "utf-8")
+        imagens.imagem = "data:" + request.files['imagem'].content_type + ";base64," + str(base64.b64encode( request.files['imagem'].read() ) , "utf-8")
   
     anc = anuncios.updateAnuncio()
 

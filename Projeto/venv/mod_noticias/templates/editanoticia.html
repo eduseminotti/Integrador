@@ -5,32 +5,48 @@
     <br>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
-            <form action="{{ url_for('noticias.Addnoticia') }}" name="usuario" method="POST" enctype="multipart/form-data">
-                <h2>Cadastro de Noticias</h2>
+            <form action="{{ url_for('noticias.Updatenoticia') }}" name="noticia" method="POST"
+                enctype="multipart/form-data">
+                <h2>Edição de Noticias</h2>
                 <hr>
+                {% if news %}
+                {% for row in news %}
                 <div class="form-row">
                     <input hidden type="text" value="{{ session['id'] }}" name="UserId">
+                    <input hidden type="text" value="{{ row[0] }}" name="PostId">
                     <div class="form-group col-md-12">
                         <label for="Titulo">Titulo</label>
-                        <input  required maxlength="100" type="text" class="form-control" name="Titulo">
+                        <input required value="{{ row[1] }}" maxlength="100" type="text" class="form-control"
+                            name="Titulo">
                     </div>
-              
+
                     <div class="form-group col-md-12">
                         <label for="Conteudo">Conteudo</label>
                         <textarea required maxlength="500" type="text" class="form-control" id="Conteudo"
-                            name="Conteudo"></textarea>
+                            name="Conteudo">{{ row[2] }}</textarea>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="imagem">Imagem:</label>
                         <input type="file" name="imagem" accept="image/*" id="imagem">
+                        {% if row[3] %}
+                        <div class="post-thumbnail">
+                            <a href="#"><img src="{{row[3] }}" alt="" width="150PX" height="150PX"></a>
+                            <div class="custom-control custom-checkbox">
+                                <br>
+                                <input type="checkbox" class="custom-control-input" name="RemoveIMG" id="RemoveIMG">
+                                <label class="custom-control-label" for="RemoveIMG">Remover Imagem?</label>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
+                {% endfor %}
+                {% endif %}
                 <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
                 <script>
                     CKEDITOR.replace('Conteudo');
                 </script>
-
-                <button type="submit" name="Novanoticia" id="Novanoticia" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" name="Novanoticia" id="Novanoticia" class="btn btn-primary">Gravar</button>
                 <div class="row">
                     <div class="form-group col-md-12"></div>
                 </div>
