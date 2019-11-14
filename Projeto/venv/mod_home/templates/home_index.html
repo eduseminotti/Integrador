@@ -18,12 +18,14 @@
         </div>
     </div>
 
+    
+
     <div class="hero-post-slides owl-carousel">
 
         {% for row in banners %}
         <!-- Single Hero Post -->
         <div class="single-hero-post d-flex flex-wrap">
-            <!-- Post Thumbnail -->
+            
             <div class="slide-post-thumbnail h-100 bg-img" style="background-image: url({{row[3]}});"></div>
             <!-- Post Content -->
             <div class="slide-post-content h-100 d-flex align-items-center">
@@ -44,5 +46,99 @@
     </div>
 </section>
 <!-- ##### Hero Area End ##### -->
+<!-- ##### Blog Content Area Start ##### -->
+<section class="blog-content-area section-padding-100">
+    <div class="container">
 
+        <div class="row justify-content-center">
+            <!-- Blog Posts Area -->
+            <div class="col-12 col-lg-8">
+                <div class="blog-posts-area">
+                    <div class="row">
+
+                        <!-- Featured Post Area -->
+                        <div class="col-12">
+                            <div class="featured-post-area mb-50">
+                                <!-- Thumbnail -->
+                                <div class="post-thumbnail mb-30">
+                                    <a href="#"><img src="img/blog-img/12.jpg" alt=""></a>
+                                </div>
+                                <!-- Featured Post Content -->
+                                <div class="featured-post-content">
+                                    <p class="post-date">MAY 7, 2018 / lifestyle</p>
+                                    <a href="#" class="post-title">
+                                        <h2>Titulo da Noticia atual</h2>
+                                    </a>
+                                    <p class="post-excerpt">Descrição da noticia atual</p>
+                                </div>
+                                <!-- Post Meta -->
+                                <div class="post-meta d-flex align-items-center justify-content-between">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Blog Post -->
+                        <div class="col-12 col-sm-6">
+                            <div class="single-blog-post mb-50">
+                                <!-- Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <a href="#"><img src="img/blog-img/1.jpg" alt=""></a>
+                                </div>
+                                <!-- Content -->
+                                <div class="post-content">
+                                    <p class="post-date">MAY 10, 2018 / life</p>
+                                    <a href="#" class="post-title">
+                                        <h4>Titulo da Noticia</h4>
+                                    </a>
+                                    <p class="post-excerpt">Descrição</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                </div>
+
+                <!-- Pager -->
+                <ol class="nikki-pager">
+                    <li><a href="#"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Mais recentes</a></li>
+                    <li><a href="#"> Anteriores <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
+                </ol>
+            </div>
+
+            <!-- Blog Sidebar Area -->
+            <div class="col-12 col-sm-9 col-md-6 col-lg-4">
+                <div class="post-sidebar-area">
+
+                    
+
+                    <!-- ##### Single Widget Area ##### -->
+                    <div class="single-widget-area mb-30">
+                        <!-- Title -->
+                        <div class="widget-title">
+                            <h6>Avisos</h6>
+                        </div>
+
+                        <!-- Single Latest Posts -->
+                        <div class="single-latest-post d-flex">
+                            <div class="post-content">
+                                <a href="#" class="post-title">
+                                    <h6>Descrição do aviso</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+<!-- ##### Blog Content Area End ##### -->
+
+<!-- ##### Instagram Area Start ##### -->
+<div class="follow-us-instagram">
+    <div class="instagram-content d-flex flex-wrap align-items-center">
+
+        
+    </div>
+</div>
 {% endblock %}
