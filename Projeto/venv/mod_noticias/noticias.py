@@ -53,14 +53,18 @@ def Addnoticia():
 
     return redirect(url_for('noticias.listanoticias'))
 
+
 @bp_noticias.route('/editanoticia', methods=['POST'])
 @validaSessao
 def editanoticia():
 
     noticias = Noticias()
 
-    noticias.id = request.form['id']
-    return render_template("novanoticia.html"), 200
+    noticias.id = request.form['Id']
+
+    news = noticias.selectnoticiaAdm()
+
+    return render_template("editanoticia.html", news=news), 200
 
 
 @bp_noticias.route('/Updatenoticia', methods=['POST'])
@@ -76,10 +80,22 @@ def Updatenoticia():
 
     imagens.Post_ID = noticias.addnoticia()
 
-    imagens.imagem = "data:" + request.files['imagem'].content_type + ";base64," + str(
-        base64.b64encode(request.files['imagem'].read()), "utf-8")
+    RmvImg = 'RemoveIMG' in request.form
+
+    if RmvImg == "on" or RmvImg == True:
+        imagens.DeleteImagem()
+    else:
+        imagens.imagem = "data:" + request.files['imagem'].content_type + ";base64," + str(
+            base64.b64encode(request.files['imagem'].read()), "utf-8")
 
     imagens.InsertImagem()
+
+    return redirect(url_for('noticias.listanoticias'))
+
+
+@bp_noticias.route('/excluinoticia', methods=['POST'])
+@validaSessao
+def excluinoticia():
 
     return redirect(url_for('noticias.listanoticias'))
 

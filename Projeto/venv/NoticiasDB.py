@@ -25,11 +25,11 @@ class Noticias(object):
         except:
             return "erro"
 
-    def selectbannerAdm(self):
+    def selectnoticiaAdm(self):
         banco=Banco()
         try:
             c=banco.conexao.cursor()
-            c.execute("select  id, titulo, Status ,conteudo,   imagem=(select top 1 img.image from dbo.Imagens as img where img.Post_ID = post.Id)"+
+            c.execute("select  id, titulo, conteudo, imagem=(select top 1 img.image from dbo.Imagens as img where img.Post_ID = post.Id)"+
             " from [dbo].[Post] as post where tipo = 2 and id = %s  order by insertdate desc" , (self.id ))
             result = c.fetchall()
             c.close()
