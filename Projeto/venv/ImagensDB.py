@@ -62,14 +62,27 @@ class Imagens(object):
         banco=Banco()
         try:
             c=banco.conexao.cursor() 
-            c.execute("delete from Imagens where post_id = %s" , ( self.Post_ID ))
+            c.execute("delete from Imagens where post_id = %s", ( self.Post_ID))
 
             banco.conexao.commit()     
 
             c.close()
             return "Imagem Removida com sucesso"
         except:
-            return "Ocorreu um erro na remoção da imagem"                                  
-                                   
+            return "Ocorreu um erro na remoção da imagem"
+
+    def nullImagem(self):
+        banco = Banco()
+        try:
+            c = banco.conexao.cursor()
+            c.execute("update Imagens set Image = null where post_id = %s", (self.Post_ID))
+
+            banco.conexao.commit()
+
+            c.close()
+            return "Imagem Removida com sucesso"
+        except:
+            return "Ocorreu um erro na remoção da imagem"
+
             
   

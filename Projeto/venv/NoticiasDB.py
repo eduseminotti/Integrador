@@ -69,14 +69,29 @@ class Noticias(object):
         except:
             return "ERRO"
 
-    def selectAllBanners(self):
-        banco=Banco()
+    def excluinoticia(self):
+        banco = Banco()
         try:
-            c=banco.conexao.cursor()
-            c.execute("select  titulo, CONTEUDO , cast (insertdate as date) ,imagem=(select top 1 img.image from dbo.Imagens as img where img.Post_ID = post.Id) "+
-            "from [dbo].[Post] as post where tipo = 1 and status = 1  order by insertdate desc")
-            result = c.fetchall()
+            c = banco.conexao.cursor()
+            c.execute("delete from Post where id = %s", (self.id))
+            banco.conexao.commit()
             c.close()
-            return result
+            return "Excluida"
         except:
             return "erro"
+
+    def updateNoticia(self):
+
+        banco = Banco()
+        try:
+            c = banco.conexao.cursor()
+            c.execute("update post set Titulo = %s, Conteudo = %s, UserPostId = %s, insertdate = getdate()  where id = %s ",
+                      (self.Titulo, self.Conteudo, self.UserPostId , self.id))
+
+            banco.conexao.commit()
+
+            c.close()
+
+            return "update ok"
+        except:
+            return "Ocorreu um erro na edição do Anuncio"

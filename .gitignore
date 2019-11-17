@@ -16,3 +16,5 @@
 /Projeto/.idea
 /Projeto/venv/.idea
 /Projeto/venv/.vs
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite-journal
