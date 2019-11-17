@@ -69,12 +69,14 @@ def AddAnuncio():
 
     anuncios.UserPostId = session['id'] 
 
-    imagens.imagem =  "data:" + request.files['imagem'].content_type + ";base64," + str(base64.b64encode( request.files['imagem'].read() ) , "utf-8")
+    imagens.imagem = "data:" + request.files['imagem'].content_type + ";base64," + str(base64.b64encode( request.files['imagem'].read() ) , "utf-8")
 
     imagens.Post_ID = anuncios.insertAnuncio()
 
-    if imagens.Post_ID !=None and imagens.Post_ID != "ERRO" and  imagens.imagem != "data:" + request.files['imagem'].content_type + ";base64," :
-        imagens.InsertImagem()
+    if imagens.imagem == "data:application/octet-stream;base64,":
+        imagens.imagem = None
+
+    imagens.InsertImagem()
 
     return redirect(url_for('Anuncios.AllAnunciosAdm' ))
     
@@ -109,13 +111,19 @@ def UpdateAnuncio():
 
     anuncios.UserPostId = session['id'] 
 
-    RmvImg = 'RemoveIMG'  in  request.form
 
-    if RmvImg == "on" or RmvImg == True:
-        imagens.DeleteImagem()
-    else:    
-        imagens.imagem = "data:" + request.files['imagem'].content_type + ";base64," + str(base64.b64encode( request.files['imagem'].read() ) , "utf-8")
-  
+    if 'imgoptions' in request.form:
+        rmvimg = request.form['imgoptions']
+    else:
+        rmvimg = "nova"
+
+    if rmvimg == "remove":
+        imagens.nullImagem()
+
+    elif rmvimg == "nova":
+        imagens.imagem = "data:" + request.files['imagem'].content_type + ";base64," + str(
+            base64.b64encode(request.files['imagem'].read()), "utf-8")
+        imagens.UpdateImagem()
     anc = anuncios.updateAnuncio()
 
     img = imagens.UpdateImagem()

@@ -47,7 +47,10 @@ def Addnoticia():
     imagens.Post_ID = noticias.addnoticia()
 
     imagens.imagem = "data:" + request.files['imagem'].content_type + ";base64," + str(
-        base64.b64encode(request.files['imagem'].read()), "utf-8")
+            base64.b64encode(request.files['imagem'].read()), "utf-8")
+
+    if imagens.imagem == "data:application/octet-stream;base64,":
+        imagens.imagem = None
 
     imagens.InsertImagem()
 
@@ -74,21 +77,26 @@ def Updatenoticia():
     noticias = Noticias()
     imagens = Imagens()
 
+    noticias.id = request.form['PostId']
+    imagens.Post_ID = noticias.id
     noticias.Titulo = request.form['Titulo']
     noticias.Conteudo = request.form['Conteudo']
     noticias.UserPostId = session['id']
 
-    imagens.Post_ID = noticias.addnoticia()
-
-    RmvImg = 'RemoveIMG' in request.form
-
-    if RmvImg == "on" or RmvImg == True:
-        imagens.DeleteImagem()
+    if 'imgoptions' in request.form:
+        rmvimg = request.form['imgoptions']
     else:
+        rmvimg = "nova"
+
+    if rmvimg == "remove":
+        imagens.nullImagem()
+
+    elif rmvimg == "nova":
         imagens.imagem = "data:" + request.files['imagem'].content_type + ";base64," + str(
             base64.b64encode(request.files['imagem'].read()), "utf-8")
+        imagens.UpdateImagem()
 
-    imagens.InsertImagem()
+    noticias.updateNoticia()
 
     return redirect(url_for('noticias.listanoticias'))
 
@@ -96,6 +104,16 @@ def Updatenoticia():
 @bp_noticias.route('/excluinoticia', methods=['POST'])
 @validaSessao
 def excluinoticia():
+
+    noticias = Noticias()
+    imagens = Imagens()
+
+    noticias.id = request.form['Id']
+    imagens.Post_ID = noticias.id
+
+    imagens.DeleteImagem()
+
+    noticias.excluinoticia()
 
     return redirect(url_for('noticias.listanoticias'))
 
