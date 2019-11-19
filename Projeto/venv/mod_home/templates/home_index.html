@@ -18,14 +18,12 @@
         </div>
     </div>
 
-    
-
     <div class="hero-post-slides owl-carousel">
 
         {% for row in banners %}
         <!-- Single Hero Post -->
         <div class="single-hero-post d-flex flex-wrap">
-            
+
             <div class="slide-post-thumbnail h-100 bg-img" style="background-image: url({{row[3]}});"></div>
             <!-- Post Content -->
             <div class="slide-post-content h-100 d-flex align-items-center">
@@ -34,18 +32,20 @@
                     <a href="#" class="post-title" data-animation="fadeIn" data-delay="300ms">
                         <h2>{{row[0]}}</h2>
                     </a>
-                    <p class="post-excerpt" data-animation="fadeIn" data-delay="500ms">{{row[1]}}</p>                  
+                    <p class="post-excerpt" data-animation="fadeIn" data-delay="500ms">{{row[1]}}</p>
                 </div>
                 <!-- Page Count -->
                 <div class="page-count"></div>
             </div>
         </div>
-         {%endfor%}
+        {%endfor%}
 
 
     </div>
 </section>
 <!-- ##### Hero Area End ##### -->
+
+
 <!-- ##### Blog Content Area Start ##### -->
 <section class="blog-content-area section-padding-100">
     <div class="container">
@@ -55,90 +55,120 @@
             <div class="col-12 col-lg-8">
                 <div class="blog-posts-area">
                     <div class="row">
+                        {%  if principal %}
+                        {% for row in principal %}
+                        <!-- Post Principal -->
 
-                        <!-- Featured Post Area -->
                         <div class="col-12">
+
                             <div class="featured-post-area mb-50">
                                 <!-- Thumbnail -->
                                 <div class="post-thumbnail mb-30">
-                                    <a href="#"><img src="img/blog-img/12.jpg" alt=""></a>
+                                    <a href="#"><img src="{{row[5]}}" alt=""></a>
                                 </div>
                                 <!-- Featured Post Content -->
                                 <div class="featured-post-content">
-                                    <p class="post-date">MAY 7, 2018 / lifestyle</p>
+                                    <p class="post-date">{{row[3] }}</p>
                                     <a href="#" class="post-title">
-                                        <h2>Titulo da Noticia atual</h2>
+                                        <h2>{{row[1]}}</h2>
                                     </a>
-                                    <p class="post-excerpt">Descrição da noticia atual</p>
+                                    <p class="post-excerpt">{{ row[2] |safe}}</p>
                                 </div>
                                 <!-- Post Meta -->
                                 <div class="post-meta d-flex align-items-center justify-content-between">
+                                    <!-- Author Comments -->
+                                    <div class="author-comments">
+                                        <a href="#"><span>by</span> {{ row[4]}}</a>
+                                        <form action="{{ url_for('noticias.noticia') }}" name="Noticias" method="POST">
+                                            <input hidden value="{{ row[0] }}" name="id">
+                                            <button type="submit" class="btn nikki-btn">Leia Mais</button>
+                                        </form>
+                                    </div>
 
                                 </div>
                             </div>
                         </div>
 
+                        {% endfor %}
+                        {% endif %}
+                        {%  if top6 %}
+                        {% for row in top6 %}
                         <!-- Single Blog Post -->
+
                         <div class="col-12 col-sm-6">
                             <div class="single-blog-post mb-50">
+
                                 <!-- Thumbnail -->
                                 <div class="post-thumbnail">
-                                    <a href="#"><img src="img/blog-img/1.jpg" alt=""></a>
+                                    <a href="#"><img src="{{row[5]}}" alt=""></a>
                                 </div>
                                 <!-- Content -->
                                 <div class="post-content">
-                                    <p class="post-date">MAY 10, 2018 / life</p>
+                                    <p class="post-date">{{row[3]}} </p>
                                     <a href="#" class="post-title">
-                                        <h4>Titulo da Noticia</h4>
+                                        <h4>{{ row[1]}}</h4>
                                     </a>
-                                    <p class="post-excerpt">Descrição</p>
+                                    <p class="post-excerpt">{{row[2]|safe}}</p>
+                                    <div class="author-comments">
+                                        <a href="#"><span>by</span> {{ row[4]}}</a>
+                                        <form action="{{ url_for('noticias.noticia') }}" name="Noticias" method="POST">
+                                            <input hidden value="{{ row[0] }}" name="id">
+                                            <button type="submit" class="btn nikki-btn">Leia Mais</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        
+                        {% endfor %}
+                        {% endif %}
 
                     </div>
                 </div>
 
                 <!-- Pager -->
                 <ol class="nikki-pager">
-                    <li><a href="#"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Mais recentes</a></li>
-                    <li><a href="#"> Anteriores <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Newer</a></li>
+                    <li><a href="#">Older <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
                 </ol>
             </div>
 
             <!-- Blog Sidebar Area -->
+
             <div class="col-12 col-sm-9 col-md-6 col-lg-4">
                 <div class="post-sidebar-area">
-
-                    
-
                     <!-- ##### Single Widget Area ##### -->
                     <div class="single-widget-area mb-30">
                         <!-- Title -->
-                        <div class="widget-title">
-                            <h6>Avisos</h6>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post d-flex">
-                            <div class="post-content">
-                                <a href="#" class="post-title">
-                                    <h6>Descrição do aviso</h6>
-                                </a>
+                        <a href="{{ url_for('Avisos.Index') }}">
+                            <div class="widget-title">
+                                <h6>Avisos</h6>
                             </div>
-                        </div>
-                    </div>
+                            {%  if avisos %}
+                            {% for row in avisos %}
+                            <!-- Single Latest Posts -->
 
-                   
+                            <div class="single-latest-post d-flex">
+
+                                <div class="post-content">
+
+                                    <h6>{{ row[1] }}</h6>
+
+                                    <p href="#" class="post-author"><span></span> {{ row[2] }}</p>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 <!-- ##### Blog Content Area End ##### -->
 
-<!-- ##### Instagram Area Start ##### -->
-<div class="follow-us-instagram">
-    <div class="instagram-content d-flex flex-wrap align-items-center">
 
-        
-    </div>
-</div>
 {% endblock %}

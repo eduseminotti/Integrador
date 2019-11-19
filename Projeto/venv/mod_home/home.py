@@ -2,6 +2,8 @@
 from flask import Blueprint, render_template, request, session, redirect , url_for
 from AdminDB import Admin
 from BannersDB import Banners
+from NoticiasDB import Noticias
+from AvisosDB import  Avisos
 
 bp_home = Blueprint('home', __name__, url_prefix='/', template_folder='templates')
 
@@ -10,8 +12,18 @@ bp_home = Blueprint('home', __name__, url_prefix='/', template_folder='templates
 def index():
 
     banners = Banners()
+    noticias = Noticias()
+    avisos = Avisos()
 
     banners = banners.selectAllBanners()
+    principal = noticias.selectTop1noticiaspublic()
+    top6 = noticias.selectTop6noticiaspublic()
+    avisos = avisos.selecttop6Avisos()
 
-    return render_template('home_index.html' , banners=banners)
-    
+    return render_template('home_index.html', banners=banners, principal=principal, top6=top6, avisos=avisos)
+
+
+
+
+
+
