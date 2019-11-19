@@ -1,0 +1,85 @@
+{% extends "modelo.html" %}
+{% block title %}Anúncios{% endblock %}
+{% block content %}
+
+<!-- ##### Blog Content Area Start ##### -->
+<section class="blog-content-area section-padding-0-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Blog Posts Area -->
+            <div class="col-12">
+
+                <!-- Post Details Area -->
+                {% if noticias %}
+                {% for row in noticias %}
+                <div class="single-post-details-area">
+                    <div class="post-content">
+                        <div class="text-center mb-50">
+                            <p class="post-date">{{ row[4] }}</p>
+                            <h2 class="post-title">{{ row[1] }}</h2>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <a href="#"><span>by</span> {{ row[5] }}</a>
+                            </div>
+                        </div>
+
+                        <!-- Post Text -->
+                        <div class="post-text">
+                            <p>{{ row[2] |safe }}</p>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <img class="mb-30" src="{{row[3]}}">
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                    </div>
+
+                    {% if related %}
+                    <!-- Related Post Area -->
+                    <div class="related-posts clearfix">
+                        <!-- Headline -->
+                        <h4 class="headline">mais Noticias</h4>
+                        <div class="row">
+
+                            {% for related in related %}
+                            <!-- Single Blog Post -->
+
+                            <div class="col-12 col-sm-6">
+                                <div class="single-blog-post mb-50">
+                                    <!-- Thumbnail -->
+                                    <div class="post-thumbnail">
+                                        <a href="#"><img src=" {{ related[5] }} " width="300px" height="300px" alt="200px"></a>
+                                    </div>
+
+                                    <!-- Content -->
+                                    <div class="post-content">
+                                        <p class="post-date">{{ related[3] }}</p>
+                                        <a method="POST" class="post-title">
+                                            <h4>{{ related[1] }}</h4>
+                                        </a>
+
+                                        <p class="post-excerpt" maxlength="100">{{ related[2] | safe}}</p>
+                                    </div>
+                                    <form action="{{ url_for('noticias.noticia') }}" name="Noticias" method="POST">
+                                        <input hidden value="{{ related[0] }}" name="id">
+                                        <button type="submit" class="btn nikki-btn">Leia Mais</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Blog Content Area End ##### -->
+
+{% endblock %}
