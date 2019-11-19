@@ -12,7 +12,26 @@ bp_noticias = Blueprint('noticias', __name__, url_prefix='/noticias', template_f
 
 @bp_noticias.route('/')
 def NoticiasIndex():
-    return render_template("noticias.html"), 200
+
+    noticia = Noticias()
+
+    news = noticia.selectnoticiaspublic()
+
+    return render_template("listanoticiasPublic.html", noticias=news), 200
+
+
+@bp_noticias.route('/noticia',methods=['POST'])
+def noticia():
+
+    noticia = Noticias()
+
+    noticia.id = request.form['id']
+
+    news = noticia.selectnoticiapublic()
+
+    related = noticia.noticiasrelacionadas()
+
+    return render_template("noticiapublic.html", noticias=news, related=related), 200
 
 
 @bp_noticias.route('/listanoticias')

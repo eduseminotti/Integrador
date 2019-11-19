@@ -1,0 +1,66 @@
+{% extends "modelo.html" %}
+{% block title %}Anúncios{% endblock %}
+{% block content %}
+
+<section class="blog-content-area section-padding-0-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Blog Posts Area -->
+            <div class="col-12 col-lg-8">
+                <div class="blog-posts-area">
+                    <div class="row">
+
+                        <!-- Section Heading -->
+                        <div class="col-12">
+                            <div class="section-heading">
+                                <h2>Noticas</h2>
+                            </div>
+                        </div>
+                        {% if noticias %}
+                        {% for row in noticias %}
+                        <!-- Single Blog Post -->
+
+                        <div class="col-12 col-sm-6">
+                            <div class="single-blog-post mb-50">
+                                <!-- Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <a href="#"><img src=" {{ row[5] }} " width="300px" height="300px" alt="200px"></a>
+                                </div>
+
+                                <!-- Content -->
+                                <div class="post-content">
+                                    <p class="post-date">{{ row[3] }}</p>
+                                    <a method="POST" class="post-title">
+                                        <h4>{{ row[1] }}</h4>
+                                    </a>
+
+                                    <p class="post-excerpt" maxlength="100">{{ row[2] | safe}}</p>
+                                </div>
+                                <form action="{{ url_for('noticias.noticia') }}" name="Noticias" method="POST">
+                                    <input hidden value="{{ row[0] }}" name="id">
+                                    <button type="submit" class="btn nikki-btn">Leia Mais</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        {%endfor%}
+                        {%else%}
+                        <div class="row">
+                            <div>
+                                <div class="col-md-12">
+                                    <p class="post-excerpt">Nenhuma Noticia!</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
