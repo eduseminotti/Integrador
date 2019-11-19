@@ -20,10 +20,11 @@ class Anuncios(object):
         banco=Banco()
         try:
             c=banco.conexao.cursor() 
-            c.execute("select id, post.titulo, cast(  post.insertdate as date) ,imagem = ( select top 1 img.image from dbo.Imagens as img where img.Post_ID = post.Id),"+
-                        "cast (post.conteudo as varchar(60)) from dbo.post as post where post.tipo = 3 and post.Status = 1 "+
-                        "and DataInicial <= cast( getdate() as date)  and datafinal  >= cast( getdate() as date)"+
-                        "order by post.insertdate desc ") 
+            c.execute("select id, post.titulo, cast(  post.insertdate as date) ,imagem = ( select top 1 img.image "
+                      "from dbo.Imagens as img where img.Post_ID = post.Id),cast (post.conteudo as varchar(60)) from "
+                      "dbo.post as post where post.tipo = 3 and post.Status = 1 and DataInicial "
+                      "<= cast( getdate() as date)  and datafinal  >= cast( getdate() as date) order by "
+                      "post.insertdate desc ")
             result = c.fetchall()
             
             c.close()
