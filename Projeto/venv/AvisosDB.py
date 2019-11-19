@@ -26,6 +26,19 @@ class Avisos(object):
         except:
             return "Ocorreu um erro na busca do Aviso"
 
+    def selecttop6Avisos(self):
+        banco=Banco()
+        try:
+            c=banco.conexao.cursor()
+            c.execute("select top 6 id, titulo,  cast( DataInicial as date) as DataInicial  from dbo.post where tipo = 4 "+
+            "and Status = 1 and DataInicial <= cast( getdate() as date)  and datafinal  >= cast( getdate() as date) "
+            "order by insertdate desc")
+            result = c.fetchall()
+            c.close()
+            return result
+        except:
+            return "Ocorreu um erro na busca do Aviso"
+
     def selectAvisosALLAdm(self):
         banco=Banco()
         try:
