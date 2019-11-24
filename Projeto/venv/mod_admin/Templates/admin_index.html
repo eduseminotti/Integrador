@@ -6,29 +6,18 @@
     <br>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
-            <form action="{{ url_for('admin.EditarConfig') }}" name="EditarConfig" method="POST">
-                <h2>Configurações Gerais</h2>
-                <hr>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="Titulo">Nome</label>
-                        <input value="" maxlength="30" type="text" class="form-control" name="Nome">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="datainicial">Telefone</label>
-                        <input value="" type="tel" class="form-control" name="Phone">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Titulo">Email</label>
-                        <input value="" maxlength="30" maxlength="50" type="email" class="form-control" name="Email">
-                    </div>
-                </div>
-          
-
-                <button type="submit" name="EditarConfig" id="EditarConfig" class="btn btn-primary">Gravar</button>
-
-            </form>
+            {% if session['tipo'] == 1 or session['tipo'] == 2 : %}
+            {% if pendentes != 0 %}
+            <div>
+              <p><h1 style="color: red">!</h1> <h3>Existem {{ pendentes }} anuncio(s) pendentes de aprovação</h3></p>
+            </div>
+            {% else  %}
+            <div>
+                <H3>Nenhum anuncio pentente de aprovação</H3>
+            </div>
+            {% endif %}
+            {% endif %}
         </div>
     </div>
-
-    {% endblock %}
+</div>
+{% endblock %}

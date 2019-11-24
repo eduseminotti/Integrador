@@ -9,30 +9,16 @@ class Admin(object):
         self.Email = Email
 
 
-    def selectConfig(self):
+    def anunciospendentes(self):
         banco=Banco()
         try:
             c=banco.conexao.cursor()
-            c.execute("SELECT [Nome] ,[Phone] ,[Email] FROM [dbo].[Configuracoes]")
+            c.execute("SELECT count(*) FROM [dbo].[Post] where tipo = 3 and Status = 0")
             result = c.fetchall()
             c.close()
             return result
         except:
-            return "Ocorreu um erro na busca das configurações"
+            return "ERRO"
 
-    def updateConfig(self):
-
-        banco=Banco()
-        try:
-
-            c=banco.conexao.cursor()
-            c.execute("update [dbo].[Configuracoes] set Nome = %s , phone = %s, Email = %s ",
-            (self.Nome, self.Phone,self.Email)) 
-            banco.conexao.commit()
-            c.close()
-
-            return "configuração atualizado com sucesso!"
-        except:
-            return "Ocorreu um erro na alteração da configuração"                
 
   

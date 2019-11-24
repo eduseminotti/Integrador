@@ -4,6 +4,7 @@ from mod_login.login import validaSessao
 from AnunciosDB import Anuncios
 from ValidaUserDB import ValidaUser
 from ImagensDB import Imagens
+from Logs import Logs
 
 import base64
 
@@ -11,7 +12,8 @@ bp_anuncios = Blueprint('Anuncios', __name__, url_prefix='/anuncios', template_f
 
 @bp_anuncios.route('/')
 def index(): 
-    
+
+
     anuncios = Anuncios()
 
     result = anuncios.selectAllAnunciosPublic()
@@ -59,6 +61,7 @@ def AddAnuncio():
 
     anuncios = Anuncios()
     imagens = Imagens()
+    logs = Logs()
 
     anuncios.Titulo = request.form['Titulo']
     anuncios.Conteudo = request.form['Conteudo']
@@ -77,7 +80,7 @@ def AddAnuncio():
         imagens.imagem = None
 
     imagens.InsertImagem()
-
+    logs.logadorInfo("Novo anuncio Criado")
     return redirect(url_for('Anuncios.AllAnunciosAdm' ))
     
 @bp_anuncios.route('/EditAnuncio', methods=['POST'])
@@ -85,7 +88,7 @@ def AddAnuncio():
 def EditAnuncio():
     
     anuncios = Anuncios()
-    
+
     anuncios.id = request.form['Id']
 
     anuncio = anuncios.selectSingleAnuncioAdm()
@@ -99,6 +102,7 @@ def UpdateAnuncio():
 
     anuncios = Anuncios()
     imagens = Imagens()
+    logs = Logs()
 
     imagens.Post_ID = request.form['Id']
     anuncios.id = request.form['Id']
@@ -110,7 +114,6 @@ def UpdateAnuncio():
     anuncios.Tipo = 3
 
     anuncios.UserPostId = session['id'] 
-
 
     if 'imgoptions' in request.form:
         rmvimg = request.form['imgoptions']
@@ -128,7 +131,10 @@ def UpdateAnuncio():
 
     img = imagens.UpdateImagem()
 
-    return redirect(url_for('Anuncios.AllAnunciosAdm' ))    
+    logs.logadorInfo("anuncio Editado  " + anuncios.id)
+
+    return redirect(url_for('Anuncios.AllAnunciosAdm' ))
+
 
 @bp_anuncios.route('/ExcluiAnuncio', methods=['POST'])
 @validaSessao
@@ -136,6 +142,7 @@ def ExcluiAnuncio():
     
     anuncios = Anuncios()
     imagens = Imagens()
+    logs = Logs()
     
     anuncios.id = request.form['Id']
     imagens.Post_ID = request.form['Id']
@@ -144,6 +151,7 @@ def ExcluiAnuncio():
 
     anuncios.DeletePost()
 
-    return redirect(url_for('Anuncios.AllAnunciosAdm' ))   
+    logs.logadorInfo("anuncio Deletado  " + anuncios.id)
 
-        
+    return redirect(url_for('Anuncios.AllAnunciosAdm'))
+

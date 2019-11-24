@@ -1,0 +1,17 @@
+Desenvolvimento realizado em Pyhthon 3.7, utilizando Flask.
+
+para o desenvolvimento das trelas, foi utilizado templates do BootStrap, alem de ajustes no CSS e javaScript.
+
+fopi utilizado o banco de dados SQLServer, na versão 2017.
+
+
+na pasta Banco de dados, contem um BKP da versao final do banco de dados, alem de um script de criação, de todas as tabelas necessarias 
+para funcionamento. bastando criar o Banco no SqlServer, e rodar o script, e ajustar o nome do banco na Classe "Banco"
+
+por padrão, tanto no back-up, quanto nos scrpits, ha 4 usuarios criados, sendo eles:
+
+user1 - tipo1 - pass: 123
+user2 - tipo2 - pass: 123
+user3 - tipo3 - pass: 123
+user4 - tipo4 - pass: 123
+

@@ -3,6 +3,7 @@ from flask import Blueprint, render_template , redirect , url_for , request ,ses
 from mod_login.login import validaSessao
 from AvisosDB import Avisos
 from ValidaUserDB import ValidaUser
+from Logs import Logs
 
 bp_avisos = Blueprint('Avisos', __name__, url_prefix='/avisos', template_folder='templates')
 
@@ -44,7 +45,7 @@ def avisosNew():
         return redirect(url_for('home.index', msg="User_sem_Permissão"))   
 
 
-    return render_template('avisosNew.html')    
+    return render_template('avisosNew.html')
   
 @bp_avisos.route('/AddAviso', methods=['POST'])
 @validaSessao
@@ -70,6 +71,9 @@ def AddAviso():
     avisos.Status = request.form['Status']
 
     exec = avisos.insertAviso()
+
+    logs = Logs()
+    logs.logadorInfo("novo Aviso Cadastrado.")
 
     return redirect(url_for('Avisos.AvisosAdm', resultInsert=exec))
 
@@ -116,14 +120,19 @@ def UpdateAviso():
 
     exec = avisos.updateAviso()
 
+    logs = Logs()
+    logs.logadorInfo("Aviso Editado: " + avisos.id)
+
+
     return redirect(url_for('Avisos.AvisosAdm', resultInsert=exec ))
+
+
 
 @bp_avisos.route('/DeleteAviso', methods=['POST'])
 @validaSessao
 def DeleteAviso():
 
     valida = ValidaUser()
-
     retorno = valida.validaPermissao("avisos", session['tipo'])
         
     if retorno != True :  
@@ -133,7 +142,10 @@ def DeleteAviso():
 
     avisos.id = request.form['Id']
 
-    exec = avisos.DeleteAviso() 
+    exec = avisos.DeleteAviso()
+
+    logs = Logs()
+    logs.logadorInfo("Aviso Excluido: " + avisos.id)
 
     return redirect(url_for('Avisos.AvisosAdm', resultInsert=exec ))
 

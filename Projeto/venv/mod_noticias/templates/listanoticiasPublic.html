@@ -33,8 +33,6 @@
                                     <a method="POST" class="post-title">
                                         <h4>{{ row[1] }}</h4>
                                     </a>
-
-                                    <p class="post-excerpt" maxlength="100">{{ row[2] | safe}}</p>
                                 </div>
                                 <form action="{{ url_for('noticias.noticia') }}" name="Noticias" method="POST">
                                     <input hidden value="{{ row[0] }}" name="id">
