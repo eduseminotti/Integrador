@@ -22,13 +22,11 @@
                         <label for="dataFinal">Data Final</label>
                         <input required type="date" class="form-control" name="DataFinal">
                     </div>
-                    {% if session['tipo'] !=4: %}
+                    {% if session['tipo'] !=4 %}
                     <input hidden type="number" class="form-control" value="1" name="Status">
                     {%else%}
                     <input hidden type="number" class="form-control" value="0" name="Status">
                     {% endif %}
-
-                
                     <div class="form-group col-md-12">
                         <label for="Conteudo">Conteudo</label>
                         <textarea required maxlength="500" type="text" class="form-control" id="Conteudo"
@@ -43,7 +41,6 @@
                 <script>
                     CKEDITOR.replace('Conteudo');
                 </script>
-
                 <button type="submit" name="NovoAnuncio" id="NovoAnuncio" class="btn btn-primary">Cadastrar</button>
                 <div class="row">
                     <div class="form-group col-md-12"></div>

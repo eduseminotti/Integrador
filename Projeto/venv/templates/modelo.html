@@ -64,6 +64,8 @@
                                     <li><a href="#">Administração</a>
                                         <ul class="dropdown">
 
+                                            <li><a href="{{ url_for('admin.index') }}">Admin Home</a></li>
+
                                             {% if session['tipo'] == 1  %}
                                             <li><a href="{{ url_for('Banners.BannersList') }}">Banners</a></li>
                                             {% endif %}

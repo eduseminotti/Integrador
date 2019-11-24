@@ -10,22 +10,14 @@ bp_admin = Blueprint('admin', __name__, url_prefix='/admin', template_folder='te
 @validaSessao
 def index():
 
-    #admin = Admin()
+    admin = Admin()
 
-    #result = admin.selectConfig()
-    
-    return render_template('admin_index.html')
+    result = admin.anunciospendentes()
+    pendentes = 0
+    for row in result:
+        pendentes = row[0]
 
-@bp_admin.route("/EditarConfig", methods=['POST'])
-@validaSessao
-def EditarConfig():
 
-    #admin = Admin()
-    
-    # admin.Nome = request.form['Nome']
-    # admin.Phone = request.form['Phone']
-    # admin.Email = request.form['Email']
 
-    #exec = admin.updateConfig()
+    return render_template('admin_index.html', pendentes=pendentes)
 
-    return redirect(url_for('admin.index'))

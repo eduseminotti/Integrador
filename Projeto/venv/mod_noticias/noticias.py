@@ -4,6 +4,7 @@ from mod_login.login import validaSessao
 from NoticiasDB import Noticias
 from ImagensDB import Imagens
 from ValidaUserDB import ValidaUser
+from Logs import Logs
 
 import base64
 
@@ -38,6 +39,12 @@ def noticia():
 @validaSessao
 def listanoticias():
 
+    valida = ValidaUser()
+    retorno = valida.validaPermissao("noticias", session['tipo'])
+
+    if retorno != True:
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))
+
     noticias = Noticias()
 
     news = noticias.selectAllnoticiasAdm()
@@ -48,6 +55,11 @@ def listanoticias():
 @bp_noticias.route('/novanoticia')
 @validaSessao
 def novanoticia():
+    valida = ValidaUser()
+    retorno = valida.validaPermissao("noticias", session['tipo'])
+
+    if retorno != True:
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))
 
     return render_template("novanoticia.html"), 200
 
@@ -55,6 +67,12 @@ def novanoticia():
 @bp_noticias.route('/Addnoticia', methods=['POST'])
 @validaSessao
 def Addnoticia():
+
+    valida = ValidaUser()
+    retorno = valida.validaPermissao("noticias", session['tipo'])
+
+    if retorno != True:
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))
 
     noticias = Noticias()
     imagens = Imagens()
@@ -73,12 +91,21 @@ def Addnoticia():
 
     imagens.InsertImagem()
 
+    logs = Logs()
+    logs.logadorInfo("Nova noticia cadastrada.")
+
     return redirect(url_for('noticias.listanoticias'))
 
 
 @bp_noticias.route('/editanoticia', methods=['POST'])
 @validaSessao
 def editanoticia():
+
+    valida = ValidaUser()
+    retorno = valida.validaPermissao("noticias", session['tipo'])
+
+    if retorno != True:
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))
 
     noticias = Noticias()
 
@@ -92,6 +119,12 @@ def editanoticia():
 @bp_noticias.route('/Updatenoticia', methods=['POST'])
 @validaSessao
 def Updatenoticia():
+
+    valida = ValidaUser()
+    retorno = valida.validaPermissao("noticias", session['tipo'])
+
+    if retorno != True:
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))
 
     noticias = Noticias()
     imagens = Imagens()
@@ -117,12 +150,21 @@ def Updatenoticia():
 
     noticias.updateNoticia()
 
+    logs = Logs()
+    logs.logadorInfo("Noticia Editada com sucesso: " + noticias.id)
+
     return redirect(url_for('noticias.listanoticias'))
 
 
 @bp_noticias.route('/excluinoticia', methods=['POST'])
 @validaSessao
 def excluinoticia():
+
+    valida = ValidaUser()
+    retorno = valida.validaPermissao("noticias", session['tipo'])
+
+    if retorno != True:
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))
 
     noticias = Noticias()
     imagens = Imagens()
@@ -133,6 +175,9 @@ def excluinoticia():
     imagens.DeleteImagem()
 
     noticias.excluinoticia()
+
+    logs = Logs()
+    logs.logadorInfo("Noticia excluida com sucesso: " + noticias.id)
 
     return redirect(url_for('noticias.listanoticias'))
 

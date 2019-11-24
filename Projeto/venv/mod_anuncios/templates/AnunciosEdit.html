@@ -12,7 +12,6 @@
                 <div class="form-row">
                     {% if anuncio %}
                     {% for anuncio in anuncio%}
-
                     <input hidden type="text" value="{{ session['id'] }}" name="UserId">
                     <input hidden type="text" value="{{ anuncio[0] }}" name="Id">
                     <div class="form-group col-md-12">
@@ -31,33 +30,27 @@
                     {% if session['tipo'] == 4 %}
                     <input hidden type="number" class="form-control" value="0" name="Status">
                     {%else%}
-
                     <div class="form-group col-md-6">
                         <label for="Status">Status</label>
-
                         {% if  anuncio[5] == 1 %}
                         <select class="custom-select" name="Status" id="Status">
                             <option value="0">Pendente</option>
                             <option selected value="1">Aprovado</option>
                             <option value="2">Rejeitado</option>
-
                         </select>
                         {% elif anuncio[5] == 2 %}
                         <select class="custom-select" name="Status" id="Status">
                             <option value="0">Pendente</option>
                             <option value="1">Aprovado</option>
                             <option selected value="2">Rejeitado</option>
-
                         </select>
                         {% elif  anuncio[5] == 0 %}
                         <select class="custom-select" name="Status" id="Status">
                             <option selected value="0">Pendente</option>
                             <option value="1">Aprovado</option>
                             <option value="2">Rejeitado</option>
-
                         </select>
                         {% endif %}
-
                     </div>
                     <div class="form-group col-md-6">
                         <label for="username">Usuário</label>
@@ -71,8 +64,6 @@
                             name="Conteudo">{{anuncio[2] }}</textarea>
                     </div>
                     <div class="form-group col-md-12">
-
-
                         {% if anuncio[7] %}
                         <div class="post-thumbnail">
                             <a href="#"><img src="{{anuncio[7] }}" alt="" width="150PX" height="150PX"></a>
@@ -94,10 +85,11 @@
                                     <label class="form-check-label" for="exampleRadios3">Nova Imagem</label>
                                 </div>
                             </div>
-                            <label for="imagem">Imagem:</label>
-                            <input value="" type="file" name="imagem" accept="image/*" id="imagem">
+
                         </div>
                         {% endif %}
+                        <label for="imagem">Imagem:</label>
+                        <input value="" type="file" name="imagem" accept="image/*" id="imagem">
 
                     </div>
                     <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>

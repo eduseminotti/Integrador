@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template , redirect , url_for , request ,session
+from flask import Blueprint, render_template, redirect, url_for, request, session
 from pathlib import Path
 from datetime import datetime
+
 
 class Logs(object):
 
@@ -12,57 +13,56 @@ class Logs(object):
         self.fileName = "c:\log.txt"
 
     def CriaArqCasoNaoExista(self):
-   
+
         file = Path(self.fileName)
         isFile = file.is_file()
 
-
-        if isFile == True :
+        if isFile == True:
             return
         else:
             arquivo = open(self.fileName, 'w')
             arquivo.close()
 
-                
-    def LogadorErro(self, message):
+    def logadorErro(self, message):
 
         self.message = message
 
         self.CriaArqCasoNaoExista()
-        
+
         now = datetime.now()
         now = now.strftime("%d/%m/%Y (%H:%M:%S.%f)")
+        user = " Sem Usuário Logado"
+        if 'user' in session:
+            user = session['user']
+
 
         arq = open(self.fileName, "r")
-        conteudo = arq.readlines() 
-        conteudo.append("\n" + now + " - [ERRO] - " + self.message )
+        conteudo = arq.readlines()
+
+        conteudo.append("\n" + now + " - [ERRO] - " + self.message + " - Usuario: " + user)
 
         arq = open(self.fileName, "w")
 
         arq.writelines(conteudo)
-        arq.close()  
+        arq.close()
 
-    def LogadorInfo(self,message):
+    def logadorInfo(self, message):
 
         self.message = message
 
         self.CriaArqCasoNaoExista()
-        
+
         now = datetime.now()
         now = now.strftime("%d/%m/%Y (%H:%M:%S.%f)")
+        user = " Sem Usuário Logado"
+        if 'user' in session:
+            user = session['user']
 
         arq = open(self.fileName, "r")
-        conteudo = arq.readlines() 
-        conteudo.append("\n" + now + " - [INFO] - " + self.message )
+        conteudo = arq.readlines()
+        conteudo.append("\n" + now + " - [INFO] - " + self.message + " - Usuario: " + user)
 
         arq = open(self.fileName, "w")
 
         arq.writelines(conteudo)
-        arq.close()           
-
-
-
-                    
-
-
-
+        arq.close()

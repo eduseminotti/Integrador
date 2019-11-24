@@ -3,6 +3,7 @@ from flask import Blueprint, render_template , redirect , url_for , request,sess
 from mod_login.login import validaSessao
 from UsuariosDB import Usuarios
 from ValidaUserDB import ValidaUser
+from Logs import Logs
 
 bp_usuarios = Blueprint('usuarios', __name__, url_prefix='/usuarios', template_folder='templates')
 
@@ -61,6 +62,9 @@ def addUser():
 
     exec = user.insertUser()
 
+    logs = Logs()
+    logs.logadorInfo("Novo Usuario cadastrado: " + user.Nome)
+
     return redirect(url_for('usuarios.index', resultInsert=exec))
 
 
@@ -106,6 +110,9 @@ def UpdateUser():
     user.phone = request.form['Phone']
 
     exec = user.updateUser()
+
+    logs = Logs()
+    logs.logadorInfo("Usuario Editado: " + user.Nome)
 
     return redirect(url_for('usuarios.index', resultUpdate=exec))
 
