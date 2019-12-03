@@ -21,7 +21,7 @@ def NoticiasIndex():
     return render_template("listanoticiasPublic.html", noticias=news), 200
 
 
-@bp_noticias.route('/noticia',methods=['POST'])
+@bp_noticias.route('/noticia', methods=['POST'])
 def noticia():
 
     noticia = Noticias()
@@ -80,6 +80,8 @@ def Addnoticia():
     noticias.Titulo = request.form['Titulo']
     noticias.Conteudo = request.form['Conteudo']
     noticias.UserPostId = session['id']
+    noticias.DataInicial = request.form['DataInicial']
+    noticias.DataFinal = request.form['DataFinal']
 
     imagens.Post_ID = noticias.addnoticia()
 
@@ -134,6 +136,8 @@ def Updatenoticia():
     noticias.Titulo = request.form['Titulo']
     noticias.Conteudo = request.form['Conteudo']
     noticias.UserPostId = session['id']
+    noticias.DataInicial = request.form['DataInicial']
+    noticias.DataFinal = request.form['DataFinal']
 
     if 'imgoptions' in request.form:
         rmvimg = request.form['imgoptions']
