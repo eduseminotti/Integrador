@@ -129,7 +129,7 @@ def UpdateAnuncio():
         imagens.UpdateImagem()
     anc = anuncios.updateAnuncio()
 
-    img = imagens.UpdateImagem()
+
 
     logs.logadorInfo("anuncio Editado  " + anuncios.id)
 
