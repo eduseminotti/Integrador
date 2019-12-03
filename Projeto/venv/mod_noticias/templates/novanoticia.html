@@ -14,7 +14,14 @@
                         <label for="Titulo">Titulo</label>
                         <input  required maxlength="100" type="text" class="form-control" name="Titulo">
                     </div>
-              
+              <div class="form-group col-md-6">
+                        <label for="datainicial">Data Inicial</label>
+                        <input  required type="date" class="form-control" name="DataInicial">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="dataFinal">Data Final</label>
+                        <input required type="date" class="form-control" name="DataFinal">
+                    </div>
                     <div class="form-group col-md-12">
                         <label for="Conteudo">Conteudo</label>
                         <textarea required maxlength="500" type="text" class="form-control" id="Conteudo"
@@ -34,6 +41,9 @@
                 <div class="row">
                     <div class="form-group col-md-12"></div>
                 </div>
+            </form>
+            <form action="{{ url_for('noticias.listanoticias') }}" >
+                <button type="submit" name="Novanoticia" id="Novanoticia" class="btn btn-secondary">Cancelar</button>
             </form>
         </div>
     </div>

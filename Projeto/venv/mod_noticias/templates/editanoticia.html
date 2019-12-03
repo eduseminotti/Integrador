@@ -19,7 +19,14 @@
                         <input required value="{{ row[1] }}" maxlength="100" type="text" class="form-control"
                             name="Titulo">
                     </div>
-
+                    <div class="form-group col-md-6">
+                        <label for="datainicial">Data Inicial</label>
+                        <input  required value="{{ row[4] }}" type="date" class="form-control" name="DataInicial">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="dataFinal">Data Final</label>
+                        <input required value="{{ row[5] }}" type="date" class="form-control" name="DataFinal">
+                    </div>
                     <div class="form-group col-md-12">
                         <label for="Conteudo">Conteudo</label>
                         <textarea required maxlength="500" type="text" class="form-control" id="Conteudo"

@@ -3,7 +3,7 @@ from BancoDB import Banco
 
 class Noticias(object):
 
-    def __init__(self, id=0, Titulo="", Conteudo="", Tipo=2, Status="", UserPostId="", InsertDate=""):
+    def __init__(self, id=0, Titulo="", Conteudo="", Tipo=2, Status="", UserPostId="", InsertDate="", DataInicial="", DataFinal="" ):
         self.info = {}
         self.id = id
         self.Titulo = Titulo
@@ -11,6 +11,8 @@ class Noticias(object):
         self.Tipo = Tipo
         self.Status = Status
         self.UserPostId = UserPostId
+        self.DataInicial = DataInicial
+        self.DataFinal = DataFinal
         self.InsertDate = InsertDate
 
     def selectAllnoticiasAdm(self):
@@ -75,7 +77,8 @@ class Noticias(object):
             c.execute("select  id, cast(titulo as varchar(60)), CAST (Post.Conteudo AS varchar (250)) ,"
                       "cast (insertdate as date) , userpost = (select Nome from Users where id = post.UserPostId) , "
                       "image = (select Image from Imagens where Post_ID = post.id ) from [dbo].[Post] as post where "
-                      "tipo = 2  order by Insertdate desc  ")
+                      "tipo = 2  and DataInicial <= cast( getdate() as date)  and datafinal  >= cast( getdate() as "
+                      "date) order by Insertdate desc  ")
             result = c.fetchall()
             c.close()
             return result
@@ -88,7 +91,8 @@ class Noticias(object):
             c = banco.conexao.cursor()
             c.execute(
                 "select  id, titulo, conteudo, imagem=(select top 1 img.image from dbo.Imagens as img where img.Post_ID = post.Id)," +
-                "cast(insertdate as date) , username = (select nome from users where id = post.userpostid) from [dbo].[Post] as post where id = %s  ", (self.id))
+                "cast(insertdate as date) , username = (select nome from users where id = post.userpostid) from ["
+                "dbo].[Post] as post where id = %s   ", (self.id))
             result = c.fetchall()
             c.close()
             return result
@@ -100,7 +104,8 @@ class Noticias(object):
         try:
             c = banco.conexao.cursor()
             c.execute(
-                "select  id, titulo, conteudo, imagem=(select top 1 img.image from dbo.Imagens as img where img.Post_ID = post.Id)" +
+                "select  id, titulo, conteudo, imagem=(select top 1 img.image from dbo.Imagens as img where "
+                "img.Post_ID = post.Id), cast(Post.DataInicial as date ), cast(Post.DataFinal as date) " +
                 " from [dbo].[Post] as post where tipo = 2 and id = %s  order by insertdate desc", (self.id))
             result = c.fetchall()
             c.close()
@@ -156,8 +161,8 @@ class Noticias(object):
         try:
             c = banco.conexao.cursor()
             c.execute(
-                "update post set Titulo = %s, Conteudo = %s, UserPostId = %s, insertdate = getdate()  where id = %s ",
-                (self.Titulo, self.Conteudo, self.UserPostId, self.id))
+                "update post set Titulo = %s, Conteudo = %s, UserPostId = %s, insertdate = getdate(), DataInicial=%s "
+                ", DataFinal=%s  where id = %s ", (self.Titulo, self.Conteudo, self.UserPostId, self.DataInicial, self.DataFinal, self.id))
 
             banco.conexao.commit()
 
