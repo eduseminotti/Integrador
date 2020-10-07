@@ -107,3 +107,18 @@ class Avisos(object):
             return "Aviso atualizado com sucesso!"
         except:
             return "Ocorreu um erro na alteração do Aviso"
+
+
+    def DeleteAvisos(self):
+
+        banco=Banco()
+        try:
+
+            c=banco.conexao.cursor()
+            c.execute("delete from dbo.post where id =  %s", (self.id)) 
+            banco.conexao.commit()
+            c.close()
+
+            return "Aviso atualizado com sucesso!"
+        except:
+            return "Ocorreu um erro na alteração do Aviso"            

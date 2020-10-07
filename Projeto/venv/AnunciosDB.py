@@ -164,3 +164,29 @@ class Anuncios(object):
             return "Ocorreu um erro na remoção do post"                  
 
     
+    def DeleteOrUpdaterPost(self):
+        banco=Banco()
+        try:
+            c=banco.conexao.cursor() 
+            c.execute("delete from post where id = %s" , ( self.id ))
+
+            banco.conexao.commit()     
+
+            c.close()
+            return "post removido com sucesso"
+        except:
+            return "Ocorreu um erro na remoção do post"       
+            
+
+    def CreateOrUpdaterPost(self):
+        banco=Banco()
+        try:
+            c=banco.conexao.cursor() 
+            c.execute("delete from post where id = %s" , ( self.id ))
+
+            banco.conexao.commit()     
+
+            c.close()
+            return "post removido com sucesso"
+        except:
+            return "Ocorreu um erro na remoção do post"                  
