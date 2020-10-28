@@ -1,0 +1,171 @@
+{% extends "modelo.html" %}
+
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<!-- ##### Hero Area Start ##### -->
+<section class="hero-area">
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="circle-preloader">
+            <div class="a" style="--n: 5;">
+                <div class="dot" style="--i: 0;"></div>
+                <div class="dot" style="--i: 1;"></div>
+                <div class="dot" style="--i: 2;"></div>
+                <div class="dot" style="--i: 3;"></div>
+                <div class="dot" style="--i: 4;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-post-slides owl-carousel">
+
+        {% for row in banners %}
+        <!-- Single Hero Post -->
+        <div class="single-hero-post d-flex flex-wrap">
+
+            <div class="slide-post-thumbnail h-100 bg-img" style="background-image: url({{row[3]}});"></div>
+            <!-- Post Content -->
+            <div class="slide-post-content h-100 d-flex align-items-center">
+                <div class="slide-post-text">
+                    <p class="post-date" data-animation="fadeIn" data-delay="100ms">{{row[2]}}</p>
+                    <a href="#" class="post-title" data-animation="fadeIn" data-delay="300ms">
+                        <h2>{{row[0]}}</h2>
+                    </a>
+                    <p class="post-excerpt" data-animation="fadeIn" data-delay="500ms">{{row[1]}}</p>
+                </div>
+                <!-- Page Count -->
+                <div class="page-count"></div>
+            </div>
+        </div>
+        {%endfor%}
+
+
+    </div>
+</section>
+<!-- ##### Hero Area End ##### -->
+
+
+<!-- ##### Blog Content Area Start ##### -->
+<section class="blog-content-area section-padding-100">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <!-- Blog Posts Area -->
+            <div class="col-12 col-lg-8">
+                <div class="blog-posts-area">
+                    <div class="row">
+                        {%  if principal %}
+                        {% for row in principal %}
+                        <!-- Post Principal -->
+
+                        <div class="col-12">
+
+                            <div class="featured-post-area mb-50">
+                                <!-- Thumbnail -->
+                                <div class="post-thumbnail mb-30">
+                                    <a href="#"><img src="{{row[5]}}" alt=""></a>
+                                </div>
+                                <!-- Featured Post Content -->
+                                <div class="featured-post-content">
+                                    <p class="post-date">{{row[3] }}</p>
+                                    <a href="#" class="post-title">
+                                        <h2>{{row[1]}}</h2>
+                                    </a>
+                                    <p class="post-excerpt">{{ row[2] |safe}}</p>
+                                </div>
+                                <!-- Post Meta -->
+                                <div class="post-meta d-flex align-items-center justify-content-between">
+                                    <!-- Author Comments -->
+                                    <div class="author-comments">
+                                        <a href="#"><span>by</span> {{ row[4]}}</a>
+                                        <form action="{{ url_for('noticias.noticia') }}" name="Noticias" method="POST">
+                                            <input hidden value="{{ row[0] }}" name="id">
+                                            <button type="submit" class="btn nikki-btn">Leia Mais</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                        {% endif %}
+                        {%  if top6 %}
+                        {% for row in top6 %}
+                        <!-- Single Blog Post -->
+
+                        <div class="col-12 col-sm-6">
+                            <div class="single-blog-post mb-50">
+
+                                <!-- Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <a href="#"><img src="{{row[5]}}" alt=""></a>
+                                </div>
+                                <!-- Content -->
+                                <div class="post-content">
+                                    <p class="post-date">{{row[3]}} </p>
+                                    <a href="#" class="post-title">
+                                        <h4>{{ row[1]}}</h4>
+                                    </a>
+
+                                    <div class="author-comments">
+                                        <a href="#"><span>by</span> {{ row[4]}}</a>
+                                        <form action="{{ url_for('noticias.noticia') }}" name="Noticias" method="POST">
+                                            <input hidden value="{{ row[0] }}" name="id">
+                                            <button type="submit" class="btn nikki-btn">Leia Mais</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <!-- Pager -->
+
+            </div>
+
+            <!-- Blog Sidebar Area -->
+
+            <div class="col-12 col-sm-9 col-md-6 col-lg-4">
+                <div class="post-sidebar-area">
+                    <!-- ##### Single Widget Area ##### -->
+                    <div class="single-widget-area mb-30">
+                        <!-- Title -->
+                        <a href="{{ url_for('Avisos.Index') }}">
+                            <div class="widget-title">
+                                <h6>Avisos</h6>
+                            </div>
+                            {%  if avisos %}
+                            {% for row in avisos %}
+                            <!-- Single Latest Posts -->
+
+                            <div class="single-latest-post d-flex">
+
+                                <div class="post-content">
+
+                                    <h6>{{ row[1] }}</h6>
+
+                                    <p href="#" class="post-author"><span></span> {{ row[2] }}</p>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ##### Blog Content Area End ##### -->
+
+
+{% endblock %}
