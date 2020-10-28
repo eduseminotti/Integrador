@@ -45,7 +45,26 @@ def BannersEdit():
     result = banners.selectbannerAdm()
 
 
-    return render_template('BannersEdit.html',result=result)            
+    return render_template('BannersEdit.html',result=result)     
+
+
+def BannersEditOrUpdate():
+
+    validauser = ValidaUser()
+
+    retorno = validauser.validaPermissao("banners", session['tipo'])
+
+    if retorno != True:
+        return redirect(url_for('home.index', msg="User_sem_Permissão"))
+
+    banners = Banners()
+
+    banners.id = request.form['Id']
+    
+    result = banners.selectbannerAdm()
+
+
+    return render_template('BannersEdit.html',result=result)     
 
 
 @bp_Banners.route('/Updatebanner', methods=['POST'])   
